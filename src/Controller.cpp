@@ -1,7 +1,7 @@
 #include "Controller.h"
 
 Controller::Controller() {
-    if (!texture.loadFromFile("tile.png"))
+    if (!texture.loadFromFile("Boat.png"))
     {
         // should throw error
         std::cout << "error";

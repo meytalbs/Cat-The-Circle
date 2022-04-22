@@ -46,7 +46,7 @@ elseif (CMAKE_CXX_COMPILER_ID MATCHES ".*Clang")
     )
 endif ()
 
-add_executable (${CMAKE_PROJECT_NAME} src/main.cpp  "src/tile.cpp")#WIN32)
+add_executable (${CMAKE_PROJECT_NAME} src/main.cpp  "src/tile.cpp" "src/Button.cpp" "include/Button.h")#WIN32)
 
 add_subdirectory (include)
 add_subdirectory (src)
