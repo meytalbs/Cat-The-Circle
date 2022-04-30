@@ -1,3 +1,7 @@
 ﻿#file (MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/resources)
 configure_file ("Boat.png" ${CMAKE_BINARY_DIR} COPYONLY)
-configure_file ("tile.png" ${CMAKE_BINARY_DIR} COPYONLY)
+configure_file ("Tile.png" ${CMAKE_BINARY_DIR} COPYONLY)
+configure_file ("moves.png" ${CMAKE_BINARY_DIR} COPYONLY)
+configure_file ("Reset.png" ${CMAKE_BINARY_DIR} COPYONLY)
+configure_file ("staticFrog.png" ${CMAKE_BINARY_DIR} COPYONLY)
+configure_file ("arcadeClassic.ttf" ${CMAKE_BINARY_DIR} COPYONLY)
