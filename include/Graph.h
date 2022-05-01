@@ -1,25 +1,31 @@
 
 #include <iostream>
-#include <unordered_map>
+#include <vector>
 #include <algorithm>
 #include <list>
 #include <string>
 
+#include "Tile.h"
+
+/*
 struct Node {
     int key;
     std::string color = "white";
 
 };
+*/
 
 class Graph {
 public:   
-    Graph();    
-    Graph(int rows, int cols);
+    Graph(int rows = 11, int cols = 11);
 
-    std::list<Node> getList(int);
+    void createTiles();
+    void updateNeighborsList();
+    //std::list<Node> getList(int);
+    void BFS(Location source);
 
 private:
-    std::unordered_map<int, std::list<Node>> m_graph;
+    std::vector<std::vector<Tile>> m_graph;
     int m_rows = 11;
     int m_cols = 11;
 };
