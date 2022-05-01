@@ -3,4 +3,7 @@
                                               "Controller.cpp"
                                               "Window.cpp"
                                               "Board.cpp"
+                                              "Tile.cpp"
+                                              "Resources.cpp"
+                                              "Menu.cpp"
                                               )
