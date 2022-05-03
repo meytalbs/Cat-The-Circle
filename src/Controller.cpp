@@ -2,8 +2,8 @@
 
 #include "Controller.h"
 Controller::Controller() {
-    texture= (Resources::instance().getTexture(boat));
-    frogtex= (Resources::instance().getTexture(frog));
+    texture= (Resources::instance().getTexture(gameObjectId::boat));
+    frogtex= (Resources::instance().getTexture(gameObjectId::frog));
 }
 
 void Controller::run() 
@@ -11,11 +11,11 @@ void Controller::run()
 
     sf::Sprite boat;
     sf::Sprite frogSprite;//!!temppppp
-    frogSprite.setTexture(frogtex);
+    frogSprite.setTexture(*frogtex);
     frogSprite.setOrigin(50,50);
     frogSprite.setScale(0.9f,0.9f);
     frogSprite.setPosition(sf::Vector2f(MARGIN_RIGHT-30+SPACE*2,90+SPACE*2));
-    boat.setTexture(texture);
+    boat.setTexture(*texture);
 
     boat.setPosition(sf::Vector2f(50.f, 50.f)); // absolute position
     //need to create singlton for all of the assets

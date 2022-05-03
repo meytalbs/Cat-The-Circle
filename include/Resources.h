@@ -6,10 +6,12 @@
 #include <vector>
 #include <iostream>
 #include <string>
+#include <array>
 //#include "Animation.h"
 #include "Macros.h"
 using std::vector;
 using std::string;
+
 class Resources {
 public:
     static Resources &instance();
@@ -18,10 +20,10 @@ public:
 
     void operator=(const Resources &) = delete;
 
-    sf::Texture &getTexture(gameObjectId id) ;
+    sf::Texture *getTexture(gameObjectId id);
 
   //  sf::Font& getFont() ;
-    sf::Sprite& getSprite(gameObjectId id) ;
+    sf::Sprite* getSprite(gameObjectId id); // todo
    // sf::Music& getMusic(gameObjectId id) ;
 
     //Animation *getAnimation(gameObjectId id) ;
@@ -35,8 +37,10 @@ private:
   //  void buildAnimation();
   //  void buildMusic();
     sf::Texture m_temp;
-    vector <sf::Sprite> m_sprite;
-    vector <sf::Texture> m_texture;
+    //vector <sf::Sprite> m_sprite;
+    //vector <sf::Texture> m_texture;
+    std::array <sf::Sprite, 5> m_sprite;
+    std::array <sf::Texture, 5> m_texture;
     vector <string> m_imagePath = {"Boat","moves","Reset","Tile","staticFrog"};
     //vector <string> m_musicNames={"MainMenuMusic.ogg"};
    // vector<Animation *> m_animation;

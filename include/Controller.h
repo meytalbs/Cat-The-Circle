@@ -17,7 +17,7 @@ private:
     Menu m_menu;
     Graph m_graph;
 	Window m_window;
-    sf::Texture frogtex;
-	sf::Texture texture;//will move it to class like from project just or testing
+    sf::Texture *frogtex;
+	sf::Texture *texture;//will move it to class like from project just or testing
 
 };

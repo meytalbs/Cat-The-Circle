@@ -13,12 +13,13 @@ using std::unique_ptr;
 using std::make_unique;
 
 //will act like "board" will contain a vector of vector of tiles
+
 struct Node {
     int key;
     std::string color = "white";
 
 };
-*/
+
 
 class Graph {
 public:
@@ -27,9 +28,10 @@ public:
     void drawTiles(sf::RenderWindow& window);
     void checkIfClicked(sf::Vector2f mousePs);
 
+    void updateNeighborsList();   // todo - meytal
+
 private:
-   // std::unordered_map<int, std::list<Node>> m_graph;
-    vector<vector<unique_ptr<Tile>> > m_tiles;
+    vector<vector<Tile>> m_tiles; //
     int m_rows ;
     int m_cols ;
 };

@@ -23,7 +23,7 @@ public:
 
 
 private:
-   vector< sf::Texture >m_texture;
-   vector< sf::Sprite> m_sprite;
+   vector< sf::Texture *>m_texture;
+   vector< sf::Sprite *> m_sprite;
 
 };

@@ -1,7 +1,9 @@
 #pragma once
+#include <iostream>
+#include <list>
+
 #include "SFML/Graphics.hpp"
 #include "Resources.h"
-#include <iostream>
 #include "Macros.h"
 
 
@@ -18,10 +20,12 @@ public:
     void  updateAndDraw(sf::RenderWindow& window);
     void clicked(sf::Vector2f mousePos);
 
+    void addNeighbor(Tile *); // todo - meytal
 
 private:
     bool m_isClicked;
-    sf::Texture m_texture;
+    sf::Texture *m_texture;
     sf::Sprite m_sprite;
 
+    std::list<Tile*> m_neighbors; // todo - meytal
 };

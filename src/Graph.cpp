@@ -1,136 +1,104 @@
 #include "Graph.h"
 
-/*
-Graph::Graph()
-{
-    std::cout<<"AR";
-
-    /*
-    auto item = m_graph.find(5)->second;
-
-    for (auto i = item.begin(); i != item.end(); ++i)
-    {
-        std::cout << "su" << i->key;
-    }
-    */
-
-}
-// ----------------------------------------------------------------------------
-*/
 
 Graph::Graph(int rows, int cols)
     : m_rows(rows), m_cols(cols)
 {
+    m_tiles.reserve(m_rows * m_cols); //
 
    for (int i = 0; i < m_rows ; ++i) {
-        vector<unique_ptr<Tile>> temp;
+        vector<Tile> temp;
         for (int j = 0; j < m_cols; j++) {
+
             if(j%2==0) {
-                temp.push_back(make_unique<Tile>(sf::Vector2f(MARGIN_RIGHT-40 + SPACE * i,
+                temp.push_back(Tile(sf::Vector2f(MARGIN_RIGHT-40 + SPACE * i,
                                                               MARGIN_TOP + SPACE * j), 0.4));
-            } else
-                temp.push_back(make_unique<Tile>(sf::Vector2f(MARGIN_RIGHT + SPACE * i,
+            } 
+            else
+                temp.push_back(Tile(sf::Vector2f(MARGIN_RIGHT + SPACE * i,
                                                               MARGIN_TOP + SPACE * j), 0.4));
         }
         m_tiles.push_back(std::move(temp));
     }
+
+   // todo
+   updateNeighborsList();
 }
 // ----------------------------------------------------------------------------
+
+
 void Graph::drawTiles(sf::RenderWindow& window) {
     for (int i = 0; i < m_rows; ++i) {
         for (int j = 0; j < m_cols; j++) {
-            m_tiles[i][j]->updateAndDraw(window);
+            m_tiles[i][j].updateAndDraw(window);
         }
     }
 }
-//----------------------
+// ----------------------------------------------------------------------------
+
+
 void Graph::checkIfClicked(sf::Vector2f mousePos)
 {
     for (int i = 0; i < m_rows; ++i) {
         for (int j = 0; j < m_cols; j++) {
-            m_tiles[i][j]->clicked(mousePos);
+            m_tiles[i][j].clicked(mousePos);
         }
     }
 }
+// ----------------------------------------------------------------------------
 
-// todo - when it for left and when it for right
-/*
-std::list<Node> Graph::getList(int key) // todo - very bad!!!
+
+void Graph::updateNeighborsList()
 {
-    std::list<Node> list;
-    Node node;
+    int factor = 0, x, y;
 
-    // for even rows
-    if ((key / m_rows) % 2 == 0)
+    for (int row = 0; row < m_rows; ++row)
     {
-        if (key != 0 && key / m_rows != 0)
+        row % 2 == 0 ? factor = 0 : factor = 1;
+
+        for (int col = 0; col < m_rows; ++col)
         {
-            if (key % m_cols != 0)
+            if (row > 0 && col - factor >= 0)                                           // up left
             {
-                node.key = (key - (m_cols + 1));
-                list.push_back(node);
+                x = row - 1;
+                y = col - factor;
+                m_tiles[row][col].addNeighbor(&m_tiles[x][y]);
             }
-            node.key = key - m_cols;
-            list.push_back(node);
-        }
-        if (key % m_cols != 0)
-        {
-            node.key = key - 1;
-            list.push_back(node);
-        }
-        if ((key + 1) % m_cols != 0)
-        {
-            node.key = key + 1;
-            list.push_back(node);
-        }
-
-        if (key % m_cols != 0)
-        {
-            node.key = key + (m_cols - 1);
-            list.push_back(node);
-
-        }
-        node.key = key + m_cols;    
-        list.push_back(node);
-    }
-    // for !even rows
-    else 
-    {
-        node.key = key - m_cols;
-        list.push_back(node);
-
-        if ((key + 1) % m_cols != 0)
-        {
-            node.key = key - (m_cols - 1);
-            list.push_back(node);
-        }
-
-        if (key % m_cols != 0)
-        {
-            node.key = (key - 1);
-            list.push_back(node);
-        }
-        if ((key + 1) % m_cols != 0)
-        {
-            node.key = (key + 1);
-            list.push_back(node);
-        }
-
-        if (key / m_rows != (m_rows - 1))
-        {
-            node.key = (key + m_cols);
-            list.push_back(node);
-
-            if ((key + 1) % m_cols != 0)
+            if (row > 0 && col + 1 - factor < m_cols)                                   // up right            
             {
-                node.key = (key + (m_cols + 1));
-                list.push_back(node);
+                x = row - 1;
+                y = col + 1 - factor;
+                m_tiles[row][col].addNeighbor(&m_tiles[x][y]);
             }
+            
+            if (col > 0)                                                                // left
+            {
+                y = col - 1;
+                m_tiles[row][col].addNeighbor(&m_tiles[row][y]);
+            }
+
+            if (col + 1 < m_cols)                                                       // right
+            {
+                y = col + 1;
+                m_tiles[row][col].addNeighbor(&m_tiles[row][y]);
+            }
+
+            if (row + 1 < m_rows && col - factor > -1)                                  // down left
+            {
+                x = row + 1;
+                y = col - factor;
+                m_tiles[row][col].addNeighbor(&m_tiles[x][y]);
+            }
+
+            if (row + 1 < m_rows && col + 1 - factor < m_cols)                          // down right            
+            {
+                x = row + 1;
+                y = col + 1 - factor;
+                m_tiles[row][col].addNeighbor(&m_tiles[x][y]);
+            }
+            
         }
     }
-
-
 }
-        */
+// ----------------------------------------------------------------------------
 
-*/
