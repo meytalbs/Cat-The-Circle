@@ -6,4 +6,5 @@
                                               "Tile.cpp"
                                               "Resources.cpp"
                                               "Menu.cpp"
+                                              "Frog.cpp"
                                               )

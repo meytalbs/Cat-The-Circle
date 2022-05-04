@@ -18,7 +18,9 @@ public:
     void setPosition(const sf::Vector2f position);
     sf::Vector2<float> getLocation( ) const;
     void  updateAndDraw(sf::RenderWindow& window);
-    void clicked(sf::Vector2f mousePos);
+    bool clicked(sf::Vector2f mousePos);
+    void color();// todo
+    sf::Vector2<float> getNeighborLocation()const ; 
 
     void addNeighbor(Tile *); // todo - meytal
 

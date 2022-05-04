@@ -8,16 +8,17 @@
 #include "Resources.h"
 #include "Macros.h"
 #include "Menu.h"
+#include "Frog.h"
 class Controller
 {
 public:
 	Controller();
 	void run();
+	bool isRuning();
 private:
     Menu m_menu;
     Graph m_graph;
 	Window m_window;
-    sf::Texture *frogtex;
-	sf::Texture *texture;//will move it to class like from project just or testing
-
+	sf::Texture* texture;
+	bool m_isRuning = true;;
 };
