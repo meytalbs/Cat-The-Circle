@@ -3,8 +3,8 @@
 using std::cout;
 using std::endl;
 
-Tile::Tile(const  sf::Vector2f position, float scale, bool isClicked) : 
-    m_isClicked(isClicked)
+Tile::Tile(const  sf::Vector2f position, float scale, bool isLimit) :
+    m_isLimit(isLimit)
 {
     m_texture = Resources::instance().getTexture(gameObjectId::tile); // why do we need it?
     m_sprite = *Resources::instance().getSprite(gameObjectId::tile);
@@ -75,3 +75,7 @@ void Tile::addNeighbor(Tile *tile)
 }
 // ----------------------------------------------------------------------------
 
+void Tile::setColor(colorId color)
+{
+    m_color = color;
+}
