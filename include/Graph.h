@@ -7,6 +7,12 @@
 #include <memory>
 #include <string>
 #include "Tile.h"
+#include <random>
+#include <string>
+#include <iterator>
+#include <algorithm>
+#include "Frog.h"
+
 
 using std::vector;
 using std::unique_ptr;
@@ -24,13 +30,18 @@ struct Node {
 class Graph {
 public:
     //Graph();
-    Graph(int rows=11, int cols=11);
+    Graph(int rows=11, int cols=11,int level=1);
     void drawTiles(sf::RenderWindow& window);
-    void checkIfClicked(sf::Vector2f mousePs);
+    void checkIfClicked(sf::Vector2f mousePs,float);
+    void randomaize(int level);
+
+    vector<std::pair<int, int>> assertNum(int size);
 
     void updateNeighborsList();   // todo - meytal
 
 private:
+    Frog frog;//should move it to vector
+
     vector<vector<Tile>> m_tiles; //
     int m_rows ;
     int m_cols ;

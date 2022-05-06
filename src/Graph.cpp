@@ -1,7 +1,7 @@
 #include "Graph.h"
 
 
-Graph::Graph(int rows, int cols)
+Graph::Graph(int rows, int cols,int level)
     : m_rows(rows), m_cols(cols)
 {
     m_tiles.reserve(m_rows * m_cols); //
@@ -10,7 +10,7 @@ Graph::Graph(int rows, int cols)
         vector<Tile> temp;
         for (int j = 0; j < m_cols; j++) {
 
-            if(j%2==0) {
+            if(j%2==0 ) {
                 temp.push_back(Tile(sf::Vector2f(MARGIN_RIGHT-40 + SPACE * i,
                                                               MARGIN_TOP + SPACE * j), 0.4));
             } 
@@ -20,12 +20,40 @@ Graph::Graph(int rows, int cols)
         }
         m_tiles.push_back(std::move(temp));
     }
-
+    
+   randomaize(level);
+   
+     
    // todo
    updateNeighborsList();
 }
 // ----------------------------------------------------------------------------
+void Graph::randomaize(int level)
+{
+ 
+    vector<std::pair<int, int>> vect;
+    vect=assertNum(11);//will be chossed according to level
 
+    for (int i = 0; i < 11;i++)
+    {
+        m_tiles[vect[i].first][vect[i].second].color();
+    }
+}
+
+vector<std::pair<int, int>> Graph:: assertNum(int size)
+{
+    vector<std::pair<int, int>> temp;
+    std::random_device rd; // obtain a random number from hardware
+    std::mt19937 gen(rd()); // seed the generator
+    std::uniform_int_distribution<> distr(0, 10); // define the range
+
+    for (int i = 0; i < size;i++)
+    {
+        temp.push_back(std::make_pair(distr(gen), distr(gen)));
+    }
+    return temp;
+
+}
 
 void Graph::drawTiles(sf::RenderWindow& window) {
     for (int i = 0; i < m_rows; ++i) {
@@ -33,16 +61,23 @@ void Graph::drawTiles(sf::RenderWindow& window) {
             m_tiles[i][j].updateAndDraw(window);
         }
     }
+    frog.updateAndDraw(window);
 }
 // ----------------------------------------------------------------------------
 
 
-void Graph::checkIfClicked(sf::Vector2f mousePos)
+void Graph::checkIfClicked(sf::Vector2f mousePos, float deltaTime)
 {
     for (int i = 0; i < m_rows; ++i) {
         for (int j = 0; j < m_cols; j++) {
-            m_tiles[i][j].clicked(mousePos);
+            if (m_tiles[i][j].clicked(mousePos))
+            {
+                //maybe should return true and then bfs algo
+                std::cout << "moving";
+                frog.movePos(m_tiles[i][j].getLocation(),deltaTime);
+            }
         }
+        
     }
 }
 // ----------------------------------------------------------------------------

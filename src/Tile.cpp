@@ -36,6 +36,8 @@ sf::Vector2<float> Tile::getLocation() const
 {
     return m_sprite.getPosition();
 }
+
+
 void Tile::updateAndDraw(sf::RenderWindow& window)
 {
     //m_animation->update(row,deltaTime);
@@ -47,15 +49,24 @@ void Tile::updateAndDraw(sf::RenderWindow& window)
 // ----------------------------------------------------------------------------
 
 
-void Tile::clicked(sf::Vector2f mousePos) 
+bool Tile::clicked(sf::Vector2f mousePos) // todo
 {
-    if (m_sprite.getGlobalBounds().contains(mousePos))
+    if ((m_sprite).getGlobalBounds().contains(mousePos)&& !m_isClicked)
     {
-        m_sprite.setColor(sf::Color(150, 200, 255));
+        color();
+        return true;
     }
+    return false;
+
 }
 // ----------------------------------------------------------------------------
-
+void Tile::color() // todo
+{
+   
+        (m_sprite).setColor(sf::Color(150, 200, 255));
+        m_isClicked = true;
+    
+}
 /*
 */
 void Tile::addNeighbor(Tile *tile) 

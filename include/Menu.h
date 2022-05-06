@@ -20,10 +20,13 @@ public:
     //void setPosition(const sf::Vector2f position);
     //sf::Vector2<float> getLocation( ) const;
     void  updateAndDraw(sf::RenderWindow& window);
+    bool clicked(sf::Vector2f mousePos);// todo
+    void hover(sf::Vector2f mousePos);
 
 
 private:
+    sf::Text text;
    vector< sf::Texture *>m_texture;
-   vector< sf::Sprite *> m_sprite;
+   vector< sf::Sprite > m_sprite;
 
 };
