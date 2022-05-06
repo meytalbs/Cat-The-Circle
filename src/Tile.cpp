@@ -47,11 +47,11 @@ void Tile::updateAndDraw(sf::RenderWindow& window)
 // ----------------------------------------------------------------------------
 
 
-void Tile::clicked(sf::Vector2f mousePos) // todo
+void Tile::clicked(sf::Vector2f mousePos) 
 {
-    if ((m_sprite).getGlobalBounds().contains(mousePos))
+    if (m_sprite.getGlobalBounds().contains(mousePos))
     {
-        (m_sprite).setColor(sf::Color(150, 200, 255));
+        m_sprite.setColor(sf::Color(150, 200, 255));
     }
 }
 // ----------------------------------------------------------------------------

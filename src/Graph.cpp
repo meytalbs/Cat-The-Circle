@@ -48,7 +48,7 @@ void Graph::checkIfClicked(sf::Vector2f mousePos)
 // ----------------------------------------------------------------------------
 
 
-void Graph::updateNeighborsList()
+void Graph::updateNeighborsList() // todo - clean the function
 {
     int factor = 0, x, y;
 
