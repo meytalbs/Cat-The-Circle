@@ -5,7 +5,7 @@ Graph::Graph(int rows, int cols,int level)
     : m_rows(rows), m_cols(cols)
 {
     m_tiles.reserve(m_rows * m_cols); // todo - using operator * on 4 byte value....
-    bool isLimit = false;
+    bool isLimit;
 
    for (int i = 0; i < m_rows ; ++i) {
         vector<Tile> temp;
@@ -13,6 +13,8 @@ Graph::Graph(int rows, int cols,int level)
 
             if (i == 0 || i == m_rows - 1 || j == 0 || j == m_cols - 1)
                 isLimit = true;
+            else
+                isLimit = false;
 
             if(j%2==0 ) 
                 temp.push_back(Tile(sf::Vector2f(MARGIN_RIGHT-40 + SPACE * i,
@@ -22,7 +24,6 @@ Graph::Graph(int rows, int cols,int level)
                 temp.push_back(Tile(sf::Vector2f(MARGIN_RIGHT + SPACE * i,
                                                               MARGIN_TOP + SPACE * j), 0.4, isLimit,j,i));
 
-            isLimit = false;
         }
         m_tiles.push_back(std::move(temp));
     }
@@ -80,12 +81,20 @@ void Graph::checkIfClicked(sf::Vector2f mousePos, float deltaTime)
         for (int j = 0; j < m_cols; j++) {
             if (m_tiles[i][j].clicked(mousePos))
             {
-                updateNeighborsList();
-
+                //updateNeighborsList();
+                m_tiles[i][j].setColor(colorId::black); // todo
                 //maybe should return true and then bfs algo
                 std::pair<int, int> pos = frog.getTile();
-                cout << pos.first << " " << pos.second<<std::endl;
-                frog.movePos(BFS(&m_tiles[pos.first][pos.second])->getLocation(),deltaTime);
+               // cout << pos.first << " " << pos.second<<std::endl;
+                if (!(&m_tiles[pos.first][pos.second])->isLimit())
+                {
+                    Tile* nextTile = BFS(&m_tiles[pos.first][pos.second]);
+                    frog.movePos(nextTile->getLocation(),deltaTime);
+                }
+                else
+                {              
+                    cout << "limitttt";
+                }
             }
         }
         
@@ -94,15 +103,17 @@ void Graph::checkIfClicked(sf::Vector2f mousePos, float deltaTime)
 // ----------------------------------------------------------------------------
 
 // this function run bfs algoritem and return the next tile frog needs to move to.
-Tile* Graph::BFS(Tile * s) // todo
+Tile* Graph::BFS(Tile * s) 
 {    
-    Tile* currentTile = s;
-    bool isLimit = false;
+    Tile* currentTile = s,
+           * dest = nullptr;
+    bool isLimit = false;   
 
     // Coloring all the vertices in white
-   /* for (int row = 0; row < m_rows; ++row)
+   for (int row = 0; row < m_rows; ++row)
         for (int col = 0; col < m_rows; ++col)
-            m_tiles[row][col].setColor(colorId::white);*/
+            if (colorId::black != m_tiles[row][col].getColor())
+                m_tiles[row][col].setColor(colorId::white);
             
     // Create a queue for BFS   
     std::list<Tile *> queue;
@@ -111,46 +122,37 @@ Tile* Graph::BFS(Tile * s) // todo
     s->setColor(colorId::gray);
     queue.push_back(s);
 
+    std::list<Tile*>::iterator it;
     while (!queue.empty() && !isLimit) 
     {
         // Dequeue a vertex from queue and print it
         currentTile = queue.front();
         queue.pop_front();
-
-        // Get all adjacent vertices of the dequeued
-        // vertex s. If a adjacent has not been visited,
-        // then mark it visited and enqueue it            
-        std::list<Tile*>::iterator it;
-        for (it = currentTile->getBegin(); it != currentTile->getEnd(); ++it) 
+         
+        if ((currentTile)->isLimit())
         {
+             dest = currentTile;
+             isLimit = true;
+        }
 
-            // check if is limit -> stop
-            if ((*it)-> isLimit())
-                isLimit = true;
-            
-            // else check if color is white -> update tile color & insert to q
+        for (it = currentTile->getBegin(); it != currentTile->getEnd(); ++it)
+        {
             if ((*it)->getColor() == colorId::white)
             {
-                (*it)->setColor(colorId::gray);
-                queue.push_back((*it));
                 (*it)->setFoundBy(currentTile);
+                (*it)->setColor(colorId::gray);
+                queue.push_back(*it);
             }
-          
-
-        }                
-        
-      
-
-      //  currentTile->setColor(colorId::white); // todo - try to add using colorId
+        }  
     }
 
     // find the next tile    
-    while (currentTile->getFoundBy() != s) // todo - maybe we need from it and not from current
+    while (dest->getFoundBy() != s) 
     {
-
-        currentTile = currentTile->getFoundBy();
+        dest = dest->getFoundBy();
     }
-    return currentTile;
+
+    return dest;
 }
 // ----------------------------------------------------------------------------
 

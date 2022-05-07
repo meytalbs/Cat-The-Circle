@@ -42,5 +42,5 @@ private:
     sf::Texture *m_texture;
     sf::Sprite m_sprite;
 
-    std::list<Tile*> m_neighbors; 
+    std::list<Tile*> m_neighbors; // sherdptr
 };
