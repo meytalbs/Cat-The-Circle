@@ -13,7 +13,7 @@ using std::endl;
 class Tile 
 {
 public:
-	Tile(const sf::Vector2f position,float scale, bool = false);
+	Tile(const sf::Vector2f position,float scale, bool = false,int=0 ,int=0);
     sf::Sprite getSprite() const;
     void setPosition(const sf::Vector2f position);
     sf::Vector2<float> getLocation( ) const;
@@ -30,14 +30,15 @@ public:
     bool isLimit() { return m_isLimit; }; //todo const
     void setFoundBy(Tile* tile) { m_foundBy = tile; };
     Tile* getFoundBy() { return m_foundBy; };
-
+    int m_col;//to do delte
+    int m_row;//to do delte
 private:
     bool m_isClicked = false;
     bool m_isLimit;
     colorId m_color = colorId::white;
     Tile* m_foundBy = nullptr;
 
-
+   
     sf::Texture *m_texture;
     sf::Sprite m_sprite;
 

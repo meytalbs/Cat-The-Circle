@@ -4,7 +4,7 @@
 Frog::Frog() {
     m_texture = Resources::instance().getTexture(gameObjectId::frog); // why do we need it?
     m_sprite = *Resources::instance().getSprite(gameObjectId::frog);
-    move(5, 5);
+    move(6, 5);
     m_sprite.scale(1, 1);
     
 }
@@ -20,13 +20,22 @@ void Frog::updateAndDraw(sf::RenderWindow& window)
 }
 
 
+std::pair<int,int> Frog::getTile()const
+{
+    std::pair<int, int> pos;
 
+    pos.first = m_sprite.getPosition().x - MARGIN_RIGHT +40 ;
+    pos.first = (pos.first /SPACE)%10;
+    pos.second = m_sprite.getPosition().y - MARGIN_TOP;
+    pos.second =( pos.second / SPACE)%10;
+    return pos;
+}
 //------------------------------------------
 void Frog::movePos(sf::Vector2<float> pos,float delta )
 {
     auto dir = pos - m_sprite.getPosition();
 
-        m_sprite.move(dir * delta*30.f);
+       m_sprite.setPosition(pos);
 
     
 }

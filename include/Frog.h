@@ -5,7 +5,7 @@
 #include "SFML/Graphics.hpp"
 #include "Resources.h"
 #include "Macros.h"
-
+#include "Tile.h"
 
 using std::cout;
 using std::endl;
@@ -21,7 +21,7 @@ public:
     void move(int ,int);
     sf::Vector2f posToPixels(int, int);
     void  movePos(sf::Vector2<float>,float );
-  
+    std::pair<int, int> getTile() const ;
 
 private:
     

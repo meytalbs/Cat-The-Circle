@@ -16,11 +16,11 @@ Graph::Graph(int rows, int cols,int level)
 
             if(j%2==0 ) 
                 temp.push_back(Tile(sf::Vector2f(MARGIN_RIGHT-40 + SPACE * i,
-                                                              MARGIN_TOP + SPACE * j), 0.4, isLimit));
+                                                              MARGIN_TOP + SPACE * j), 0.4, isLimit,j,i));
             
             else
                 temp.push_back(Tile(sf::Vector2f(MARGIN_RIGHT + SPACE * i,
-                                                              MARGIN_TOP + SPACE * j), 0.4, isLimit));
+                                                              MARGIN_TOP + SPACE * j), 0.4, isLimit,j,i));
 
             isLimit = false;
         }
@@ -80,9 +80,12 @@ void Graph::checkIfClicked(sf::Vector2f mousePos, float deltaTime)
         for (int j = 0; j < m_cols; j++) {
             if (m_tiles[i][j].clicked(mousePos))
             {
+                updateNeighborsList();
+
                 //maybe should return true and then bfs algo
-                std::cout << "moving";
-                frog.movePos(m_tiles[i][j].getLocation(),deltaTime);
+                std::pair<int, int> pos = frog.getTile();
+                cout << pos.first << " " << pos.second<<std::endl;
+                frog.movePos(BFS(&m_tiles[pos.first][pos.second])->getLocation(),deltaTime);
             }
         }
         
@@ -97,11 +100,11 @@ Tile* Graph::BFS(Tile * s) // todo
     bool isLimit = false;
 
     // Coloring all the vertices in white
-    for (int row = 0; row < m_rows; ++row)
+   /* for (int row = 0; row < m_rows; ++row)
         for (int col = 0; col < m_rows; ++col)
-            m_tiles[row][col].setColor(colorId::white);
-
-    // Create a queue for BFS
+            m_tiles[row][col].setColor(colorId::white);*/
+            
+    // Create a queue for BFS   
     std::list<Tile *> queue;
 
     // Mark the current node as visited and enqueue it
@@ -120,6 +123,7 @@ Tile* Graph::BFS(Tile * s) // todo
         std::list<Tile*>::iterator it;
         for (it = currentTile->getBegin(); it != currentTile->getEnd(); ++it) 
         {
+
             // check if is limit -> stop
             if ((*it)-> isLimit())
                 isLimit = true;
@@ -131,15 +135,21 @@ Tile* Graph::BFS(Tile * s) // todo
                 queue.push_back((*it));
                 (*it)->setFoundBy(currentTile);
             }
-        }                
+          
 
-        currentTile->setColor(colorId::black); // todo - try to add using colorId
+        }                
+        
+      
+
+      //  currentTile->setColor(colorId::white); // todo - try to add using colorId
     }
-   
+
     // find the next tile    
     while (currentTile->getFoundBy() != s) // todo - maybe we need from it and not from current
-        currentTile = currentTile->getFoundBy();
+    {
 
+        currentTile = currentTile->getFoundBy();
+    }
     return currentTile;
 }
 // ----------------------------------------------------------------------------
@@ -155,45 +165,47 @@ void Graph::updateNeighborsList() // todo - clean the function
 
         for (int col = 0; col < m_rows; ++col)
         {
-            if (row > 0 && col - factor >= 0)                                           // up left
+            if (m_tiles[row][col].getColor() == colorId::white)
             {
-                x = row - 1;
-                y = col - factor;
-                m_tiles[row][col].addNeighbor(&m_tiles[x][y]);
-            }
-            if (row > 0 && col + 1 - factor < m_cols)                                   // up right            
-            {
-                x = row - 1;
-                y = col + 1 - factor;
-                m_tiles[row][col].addNeighbor(&m_tiles[x][y]);
-            }
-            
-            if (col > 0)                                                                // left
-            {
-                y = col - 1;
-                m_tiles[row][col].addNeighbor(&m_tiles[row][y]);
-            }
+                if (row > 0 && col - factor >= 0)                                           // up left
+                {
+                    x = row;
+                    y = col - factor;
+                    m_tiles[row][col].addNeighbor(&m_tiles[x][y]);
+                }
+                if (row > 0 && col + 1 - factor < m_cols)                                   // up right            
+                {
+                    x = row - 1;
+                    y = col + 1 - factor;
+                    m_tiles[row][col].addNeighbor(&m_tiles[x][y]);
+                }
 
-            if (col + 1 < m_cols)                                                       // right
-            {
-                y = col + 1;
-                m_tiles[row][col].addNeighbor(&m_tiles[row][y]);
-            }
+                if (col > 0)                                                                // left
+                {
+                    y = col - 1;
+                    m_tiles[row][col].addNeighbor(&m_tiles[row][y]);
+                }
 
-            if (row + 1 < m_rows && col - factor > -1)                                  // down left
-            {
-                x = row + 1;
-                y = col - factor;
-                m_tiles[row][col].addNeighbor(&m_tiles[x][y]);
-            }
+                if (col + 1 < m_cols)                                                       // right
+                {
+                    y = col + 1;
+                    m_tiles[row][col].addNeighbor(&m_tiles[row][y]);
+                }
 
-            if (row + 1 < m_rows && col + 1 - factor < m_cols)                          // down right            
-            {
-                x = row + 1;
-                y = col + 1 - factor;
-                m_tiles[row][col].addNeighbor(&m_tiles[x][y]);
+                if (row + 1 < m_rows && col - factor > -1)                                  // down left
+                {
+                    x = row + 1;
+                    y = col - factor;
+                    m_tiles[row][col].addNeighbor(&m_tiles[x][y]);
+                }
+
+                if (row + 1 < m_rows && col + 1 - factor < m_cols)                          // down right            
+                {
+                    x = row + 1;
+                    y = col + 1 - factor;
+                    m_tiles[row][col].addNeighbor(&m_tiles[x][y]);
+                }
             }
-            
         }
     }
 }

@@ -3,8 +3,8 @@
 using std::cout;
 using std::endl;
 
-Tile::Tile(const  sf::Vector2f position, float scale, bool isLimit) :
-    m_isLimit(isLimit)
+Tile::Tile(const  sf::Vector2f position, float scale, bool isLimit, int row, int col) :
+    m_isLimit(isLimit), m_col(col), m_row(row)
 {
     m_texture = Resources::instance().getTexture(gameObjectId::tile); // why do we need it?
     m_sprite = *Resources::instance().getSprite(gameObjectId::tile);
@@ -65,7 +65,7 @@ void Tile::color() // todo
    
         (m_sprite).setColor(sf::Color(150, 200, 255));
         m_isClicked = true;
-    
+        m_color = colorId::black;
 }
 /*
 */
