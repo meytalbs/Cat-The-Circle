@@ -5,11 +5,8 @@
 int main()
 {
 	//Location location = Location(1, 1);
-	Graph graph;
+	//Graph graph; //------------------------------------------
 	//graph.BFS(location);
-	Controller controller;
-	
-		controller.run();
-	
-
+	Controller controller;	
+	controller.run();
 }
