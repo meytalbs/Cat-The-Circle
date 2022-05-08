@@ -194,10 +194,10 @@ void Graph::updateNeighborsList() // todo - clean the function
         {
             if (m_tiles[row][col].getColor() == colorId::white)
             {
-                if (row > 0 && col - factor != -1)                                           // up left
+                if (row > 0 && col - (1-factor) != -1)                                           // up left
                 {
-                    x = row - 1; // [row-1][col-1] // ! even
-                    y = col - factor;
+                    x = row - 1; 
+                    y = col - (1-factor);
                     m_tiles[row][col].addNeighbor(&m_tiles[x][y]);
                 }
                 if (row > 0 && col + (1 - factor) < m_cols)                                   // up right            
