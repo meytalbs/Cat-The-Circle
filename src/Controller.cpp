@@ -1,8 +1,8 @@
-
-
 #include "Controller.h"
-Controller::Controller() {
-    texture= (Resources::instance().getTexture(gameObjectId::boat));
+
+Controller::Controller() 
+{
+    texture = (Resources::instance().getTexture(gameObjectId::boat));
 }
 
 void Controller::run() 
@@ -16,7 +16,6 @@ void Controller::run()
 
 	while (m_window.isOpen())
 	{
-
         float delta = clock.restart().asSeconds() * 60;///temp;
         int x, y;
         sf::Mouse mouse;
@@ -25,7 +24,6 @@ void Controller::run()
         {
             if (event.type == sf::Event::MouseButtonPressed)
             {   
-
                 // boat.setColor(sf::Color(150, 200, 255));
                 m_graph.checkIfClicked(m_window.getWindow().mapPixelToCoords(sf::Mouse::
                     getPosition(m_window.getWindow())),delta);
@@ -40,7 +38,6 @@ void Controller::run()
             // "close requested" event: we close the window
             if (event.type == sf::Event::Closed)
                 m_window.closeWindow();//check if Window class is even needed
-
         }
 
         // draw everything here...
@@ -55,6 +52,7 @@ void Controller::run()
         m_window.display();
 	}
 }
+
 bool Controller :: isRuning()
 {
     return m_isRuning;

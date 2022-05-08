@@ -35,20 +35,23 @@ Graph::Graph(int rows, int cols,int level)
 // ----------------------------------------------------------------------------
 
 
-void Graph::randomaize(int level)
+void Graph::randomaize(int level) // todo
 { 
     vector<std::pair<int, int>> vect;
     vect=assertNum(11);//will be chossed according to level
 
-    for (int i = 0; i < 11;i++)
+    for (int i = 0; i < 11; ++i)
     {
         m_tiles[vect[i].first][vect[i].second].color();
     }
+   
+    frog.move(5,5); // todo
+    
 }
 // ----------------------------------------------------------------------------
 
 
-vector<std::pair<int, int>> Graph:: assertNum(int size)
+vector<std::pair<int, int>> Graph:: assertNum(int size) // todo
 {
     vector<std::pair<int, int>> temp;
     std::random_device rd; // obtain a random number from hardware
@@ -81,6 +84,8 @@ void Graph::checkIfClicked(sf::Vector2f mousePos, float deltaTime)
         for (int j = 0; j < m_cols; j++) {
             if (m_tiles[i][j].clicked(mousePos))
             {
+                ++m_counter; // todo: print counter
+
                 //updateNeighborsList();
                 m_tiles[i][j].setColor(colorId::black); // todo
                 //maybe should return true and then bfs algo

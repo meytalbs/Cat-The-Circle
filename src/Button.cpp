@@ -26,9 +26,8 @@ void Button::update(sf::Vector2f mousePos)
     //hover
     if (m_shape.getGlobalBounds().contains(mousePos)) {
         this->m_bState = BTN_HOVER;
+
         //pressed
-
-
         switch (this->m_bState) {
         case BTN_IDLE:
             this->m_shape.setFillColor(this->m_idleColor);
@@ -42,23 +41,20 @@ void Button::update(sf::Vector2f mousePos)
         default:
             break;
         }
-
     }
-
 }
+
 void Button::quit()
 {
     m_pressed = false;
 }
+
 bool Button::isPressed(sf::Vector2f mousePos)
 {
     if (m_shape.getGlobalBounds().contains(mousePos)) {
         this->m_bState = BTN_PRESSED;
         return true;
     }
+
     return false;
-
-
 }
-
-
