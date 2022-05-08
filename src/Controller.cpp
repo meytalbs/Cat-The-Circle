@@ -3,6 +3,8 @@
 Controller::Controller() 
 {
     texture = (Resources::instance().getTexture(gameObjectId::boat));
+    text.setFont(Resources::instance().getFont());
+    text.setPosition(1325,MARGIN_TOP-20);
 }
 
 void Controller::run() 
@@ -54,6 +56,8 @@ void Controller::run()
             m_inLimit=false;
 
         }
+        text.setString(std::to_string(m_graph.getCounter()));
+        m_window.getWindow().draw(text);
         // end the current frame
         m_window.display();
 	}

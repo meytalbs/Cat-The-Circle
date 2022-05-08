@@ -21,5 +21,6 @@ private:
     Graph m_graph;
 	Window m_window;
 	sf::Texture* texture;
+    sf::Text text;
 	bool m_isRuning = true;;
 };

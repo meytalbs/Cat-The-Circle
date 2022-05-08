@@ -44,7 +44,7 @@ void Graph::randomaize(int level) // todo
     {
         m_tiles[vect[i].first][vect[i].second].color();
     }
-   
+
     frog.move(5,5); // todo
     
 }
