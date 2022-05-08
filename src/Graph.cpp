@@ -36,27 +36,44 @@ Graph::Graph(int rows, int cols,int level)
 
 
 void Graph::randomaize(int level) // todo
-{ 
+{
+    int size;
     vector<std::pair<int, int>> vect;
-    vect=assertNum(11);//will be chossed according to level
 
-    for (int i = 0; i < 11; ++i)
+    switch(level)
+    {
+        case 1 : size =14;
+                break;
+        case 2: size = 8;
+                break;
+        case 3: size =4;
+                break;
+
+    }
+
+    vect=assertNum(size,0,10);//will be chossed according to level
+
+    for (int i = 0; i < 11; ++i)//!!!!!
     {
         m_tiles[vect[i].first][vect[i].second].color();
+       // todo
     }
-   
-    frog.move(5,5); // todo
-    
+
+    do {
+        vect = assertNum(1, 4, 6);//will be chossed according to level
+    }
+    while(m_tiles[vect[0].first][vect[0].second].getColor()!=colorId::white);
+    frog.move(vect[0].first,vect[0].second);
 }
 // ----------------------------------------------------------------------------
 
 
-vector<std::pair<int, int>> Graph:: assertNum(int size) // todo
+vector<std::pair<int, int>> Graph:: assertNum(int size,int a,int b) // todo
 {
     vector<std::pair<int, int>> temp;
     std::random_device rd; // obtain a random number from hardware
     std::mt19937 gen(rd()); // seed the generator
-    std::uniform_int_distribution<> distr(0, 10); // define the range
+    std::uniform_int_distribution<> distr(a, b); // define the range
 
     for (int i = 0; i < size;i++)
     {
@@ -204,7 +221,7 @@ void Graph::updateNeighborsList() // todo - clean the function
 
                 if (row + 1 < m_rows && col - factor > -1)                                  // down left
                 {
-                    x = row + 1;
+                    x = row+1 ;
                     y = col - factor;
                     m_tiles[row][col].addNeighbor(&m_tiles[x][y]);
                 }

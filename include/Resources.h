@@ -22,7 +22,7 @@ public:
 
     sf::Texture *getTexture(gameObjectId id);
 
-  //  sf::Font& getFont() ;
+    sf::Font& getFont() ;
     sf::Sprite* getSprite(gameObjectId id); // todo
    // sf::Music& getMusic(gameObjectId id) ;
 

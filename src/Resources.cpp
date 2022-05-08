@@ -54,10 +54,15 @@ void Resources::buildSprite()
 
     }
 }
+sf::Font& Resources::getFont()
+{
+    return m_font;
+}
 Resources& Resources:: instance(){
     static auto resources=Resources();
     return resources;
 }
+
 
 /*
 Animation* Resources::getAnimation(gameObjectId id)
@@ -97,9 +102,6 @@ sf::Music& Resources::getMusic(gameObjectId id)
     return m_music;
 
 }
-sf::Font& Resources::getFont()
-{
-    return m_font;
-}
+
 
  */

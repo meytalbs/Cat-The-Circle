@@ -3,13 +3,13 @@
 Controller::Controller() 
 {
     texture = (Resources::instance().getTexture(gameObjectId::boat));
-
-    m_graph = Graph();
+    text.setFont(Resources::instance().getFont());
+    text.setPosition(1325,MARGIN_TOP-20);
+    m_graph =Graph(11,11,1);
 }
 
 void Controller::run() 
 {
-
     sf::Clock clock;
     sf::Sprite boat;
  
@@ -33,7 +33,8 @@ void Controller::run()
 
                 if (m_menu.clicked(m_window.getWindow().mapPixelToCoords(sf::Mouse::
                     getPosition(m_window.getWindow()))))
-                {                
+                {
+
                     m_graph = Graph();  //!!check if it dosent make bad things with memory!!
                 }
             }
@@ -53,7 +54,10 @@ void Controller::run()
         {
             m_graph = Graph();
             m_inLimit=false;
+
         }
+        text.setString(std::to_string(m_graph.getCounter()));
+        m_window.getWindow().draw(text);
         // end the current frame
         m_window.display();
 	}
