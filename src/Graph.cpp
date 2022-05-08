@@ -16,13 +16,13 @@ Graph::Graph(int rows, int cols,int level)
             else
                 isLimit = false;
 
-            if(j%2==0 ) 
-                temp.push_back(Tile(sf::Vector2f(MARGIN_RIGHT-40 + SPACE * i,
-                                                              MARGIN_TOP + SPACE * j), 0.4, isLimit,j,i));
+            if(i%2==0 )
+                temp.push_back(Tile(sf::Vector2f(MARGIN_RIGHT + SPACE * j-40,
+                                                              MARGIN_TOP+ SPACE * i ), 0.4, isLimit,i,j));
             
             else
-                temp.push_back(Tile(sf::Vector2f(MARGIN_RIGHT + SPACE * i,
-                                                              MARGIN_TOP + SPACE * j), 0.4, isLimit,j,i));
+                temp.push_back(Tile(sf::Vector2f(MARGIN_RIGHT + SPACE * j,
+                                                              MARGIN_TOP + SPACE * i), 0.4, isLimit,i,j));
 
         }
         m_tiles.push_back(std::move(temp));
@@ -116,11 +116,12 @@ bool Graph::checkIfClicked(sf::Vector2f mousePos, float deltaTime)
 
                 //updateNeighborsList();
                 m_tiles[i][j].setColor(colorId::black); // todo
+                cout<< "I :" << i<<j << int(m_tiles[i][j].getColor());
                 //maybe should return true and then bfs algo
                 std::pair<int, int> pos = frog.getTile();
-               // cout << pos.first << " " << pos.second<<std::endl;
                 if (!(&m_tiles[pos.first][pos.second])->isLimit())
                 {
+                    cout << "x"<<pos.first<<"y"<<pos.second<<endl;
                     Tile* nextTile = BFS(&m_tiles[pos.first][pos.second]);
                     frog.movePos(nextTile->getLocation(),deltaTime);
                 }
@@ -141,14 +142,17 @@ Tile* Graph::BFS(Tile * s)
 {    
     Tile* currentTile = s,
            * dest = nullptr;
-    bool isLimit = false;   
+    bool isLimit = false;
 
+
+cout<<"Start";
     // Coloring all the vertices in white
    for (int row = 0; row < m_rows; ++row)
         for (int col = 0; col < m_rows; ++col)
             if (colorId::black != m_tiles[row][col].getColor())
                 m_tiles[row][col].setColor(colorId::white);
-            
+
+    updateNeighborsList();
     // Create a queue for BFS   
     std::list<Tile *> queue;
 
@@ -173,16 +177,20 @@ Tile* Graph::BFS(Tile * s)
         {
             if ((*it)->getColor() == colorId::white)
             {
-                std::cout << "col: " << (*it)->m_col << " row: " << (*it)->m_row << "\n";
                 (*it)->setFoundBy(currentTile);
                 (*it)->setColor(colorId::gray);
                 queue.push_back(*it);
+                std::cout << " col: " << (*it)->m_col << " row: " << (*it)->m_row << "\n";
+
+            }
+            else {
+
             }
         }  
     }
 
     // find the next tile    
-    while (dest->getFoundBy() != s) 
+    while (dest->getFoundBy() != s)
     {
         dest = dest->getFoundBy();
     }
@@ -196,22 +204,25 @@ void Graph::updateNeighborsList() // todo - clean the function
 {
     int factor = 0, x, y;
 
-    for (int row = 0; row < m_rows; ++row)
-    {
-        row % 2 == 0 ? factor = 0 : factor = 1;
 
-        for (int col = 0; col < m_rows; ++col)
+    for (int row = 0; row < m_rows-1; ++row)
+    {
+        row % 2 == 0 ? factor =0: factor = 1;
+
+
+        for (int col = 0; col < m_rows-1; ++col)
         {
+            m_tiles[row][col].checkNeighbors();
+
             if (m_tiles[row][col].getColor() == colorId::white)
             {
-                if (row > 0 && col - (1-factor) != -1)                                           // up left
+                if (row > 0 && col > 0)                                           // up left
                 {
-                    x = row - 1; 
-                    y = col ;
-                    if(m_tiles[x][y].getColor() != colorId::black)
+                    x = row - 1;
+                    y = col - (1-factor);                    if(m_tiles[x][y].getColor() != colorId::black)
                          m_tiles[row][col].addNeighbor(&m_tiles[x][y]);
                 }
-                if (row > 0 && col + (1 - factor) < m_cols)                                   // up right            
+                if (row > 0 && col < m_cols-1)                                   // up right
                 {
                     x = row - 1;
                     y = col + (1 - factor);
@@ -226,25 +237,25 @@ void Graph::updateNeighborsList() // todo - clean the function
                         m_tiles[row][col].addNeighbor(&m_tiles[row][y]);
                 }
 
-                if (col + 1 < m_cols)                                                       // right
+                if (col  < m_cols-1)                                                       // right
                 {
                     y = col + 1;
                     if(m_tiles[row][y].getColor() != colorId::black)
                         m_tiles[row][col].addNeighbor(&m_tiles[row][y]);
                 }
 
-                if (row + 1 < m_rows && col - factor > -1)                                  // down left
+                if (row  < m_rows-1 && col  > 0)                                  // down left
                 {
                     x = row+1 ;
-                    y = col ;
+                    y = col -(factor-1);
                     if(m_tiles[x][y].getColor() != colorId::black)
                         m_tiles[row][col].addNeighbor(&m_tiles[x][y]);
                 }
 
-                if (row + 1 < m_rows && col + 1 - factor < m_cols)                          // down right            
+                if (row < m_rows-1 && col  < m_cols-1)                          // down right
                 {
                     x = row + 1;
-                    y = col + (1 - factor);
+                    y = col +  factor;
                     if(m_tiles[x][y].getColor() != colorId::black)
                         m_tiles[row][col].addNeighbor(&m_tiles[x][y]);
                 }

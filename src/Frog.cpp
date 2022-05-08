@@ -23,11 +23,11 @@ void Frog::updateAndDraw(sf::RenderWindow& window)
 std::pair<int,int> Frog::getTile()const
 {
     std::pair<int, int> pos;
+    pos.first = m_sprite.getPosition().y - MARGIN_TOP;
+    pos.first =( pos.first / SPACE)%10;
+    pos.second = m_sprite.getPosition().x - MARGIN_RIGHT +40 ;
+    pos.second = (pos.second /SPACE)%10;
 
-    pos.first = m_sprite.getPosition().x - MARGIN_RIGHT +40 ;
-    pos.first = (pos.first /SPACE)%10;
-    pos.second = m_sprite.getPosition().y - MARGIN_TOP;
-    pos.second =( pos.second / SPACE)%10;
     return pos;
 }
 //------------------------------------------
@@ -42,7 +42,7 @@ void Frog::movePos(sf::Vector2<float> pos,float delta )
 void Frog::move(int x,int y)
 {
     
-    m_sprite.setPosition(posToPixels(y,x));
+    m_sprite.setPosition(posToPixels(x,y));
 }
 //------------------------------------------
 sf::Vector2f Frog::posToPixels(int x, int y)

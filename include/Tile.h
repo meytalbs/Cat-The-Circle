@@ -30,6 +30,9 @@ public:
     bool isLimit() { return m_isLimit; }; //todo const
     void setFoundBy(Tile* tile) { m_foundBy = tile; };
     Tile* getFoundBy() { return m_foundBy; };
+
+    void checkNeighbors();
+
     int m_col;//to do delte
     int m_row;//to do delte
 private:

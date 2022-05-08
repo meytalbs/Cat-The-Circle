@@ -82,3 +82,9 @@ void Tile::setColor(colorId color)
 }
 // ----------------------------------------------------------------------------
 
+void Tile::checkNeighbors()
+{
+
+        m_neighbors.clear();
+
+}
