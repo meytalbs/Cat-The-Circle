@@ -145,6 +145,7 @@ Tile* Graph::BFS(Tile * s)
         {
             if ((*it)->getColor() == colorId::white)
             {
+                std::cout << "col: " << (*it)->m_col << " row: " << (*it)->m_row << "\n";
                 (*it)->setFoundBy(currentTile);
                 (*it)->setColor(colorId::gray);
                 queue.push_back(*it);
@@ -157,6 +158,7 @@ Tile* Graph::BFS(Tile * s)
     {
         dest = dest->getFoundBy();
     }
+
 
     return dest;
 }
@@ -175,16 +177,16 @@ void Graph::updateNeighborsList() // todo - clean the function
         {
             if (m_tiles[row][col].getColor() == colorId::white)
             {
-                if (row > 0 && col - factor >= 0)                                           // up left
+                if (row > 0 && col - factor != -1)                                           // up left
                 {
-                    x = row;
+                    x = row - 1; // [row-1][col-1] // ! even
                     y = col - factor;
                     m_tiles[row][col].addNeighbor(&m_tiles[x][y]);
                 }
-                if (row > 0 && col + 1 - factor < m_cols)                                   // up right            
+                if (row > 0 && col + (1 - factor) < m_cols)                                   // up right            
                 {
                     x = row - 1;
-                    y = col + 1 - factor;
+                    y = col + (1 - factor);
                     m_tiles[row][col].addNeighbor(&m_tiles[x][y]);
                 }
 
@@ -210,7 +212,7 @@ void Graph::updateNeighborsList() // todo - clean the function
                 if (row + 1 < m_rows && col + 1 - factor < m_cols)                          // down right            
                 {
                     x = row + 1;
-                    y = col + 1 - factor;
+                    y = col + (1 - factor);
                     m_tiles[row][col].addNeighbor(&m_tiles[x][y]);
                 }
             }
