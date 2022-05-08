@@ -27,7 +27,7 @@ public:
     bool checkIfClicked(sf::Vector2f mousePs,float);
     void randomaize(int level);
 
-    vector<std::pair<int, int>> assertNum(int size);
+    vector<std::pair<int, int>> assertNum(int size, int a , int b);
 
     void updateNeighborsList();
     Tile* BFS(Tile* s);

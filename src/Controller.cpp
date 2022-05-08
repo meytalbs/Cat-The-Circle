@@ -5,6 +5,7 @@ Controller::Controller()
     texture = (Resources::instance().getTexture(gameObjectId::boat));
     text.setFont(Resources::instance().getFont());
     text.setPosition(1325,MARGIN_TOP-20);
+    m_graph =Graph(11,11,1);
 }
 
 void Controller::run() 
@@ -32,7 +33,8 @@ void Controller::run()
 
                 if (m_menu.clicked(m_window.getWindow().mapPixelToCoords(sf::Mouse::
                     getPosition(m_window.getWindow()))))
-                {                
+                {
+
                     m_graph = Graph();  //!!check if it dosent make bad things with memory!!
                 }
             }
