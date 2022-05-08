@@ -25,14 +25,14 @@ void Controller::run()
             if (event.type == sf::Event::MouseButtonPressed)
             {   
                 // boat.setColor(sf::Color(150, 200, 255));
-                m_graph.checkIfClicked(m_window.getWindow().mapPixelToCoords(sf::Mouse::
+              m_inLimit= m_graph.checkIfClicked(m_window.getWindow().mapPixelToCoords(sf::Mouse::
                     getPosition(m_window.getWindow())),delta);
 
                 if (m_menu.clicked(m_window.getWindow().mapPixelToCoords(sf::Mouse::
                     getPosition(m_window.getWindow()))))
                 {                
-                    Graph temp;
-                    m_graph = temp;  //!!check if it dosent make bad things with memory!!    
+                  //  Graph temp;
+                   // m_graph = temp;  //!!check if it dosent make bad things with memory!!
                 }
             }
             // "close requested" event: we close the window
@@ -47,7 +47,13 @@ void Controller::run()
         m_menu.hover(m_window.getWindow().mapPixelToCoords(sf::Mouse::
             getPosition(m_window.getWindow())));
         m_menu.updateAndDraw(m_window.getWindow());
+        if(m_inLimit)
+        {
+         //   Graph temp;
+        //    m_graph = temp;
+            m_inLimit=false;
 
+        }
         // end the current frame
         m_window.display();
 	}

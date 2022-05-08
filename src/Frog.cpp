@@ -5,6 +5,7 @@ Frog::Frog() {
     m_texture = Resources::instance().getTexture(gameObjectId::frog); // why do we need it?
     m_sprite = *Resources::instance().getSprite(gameObjectId::frog);
     ///move(6, 5);
+
     m_sprite.scale(1, 1);    
 }
 //------------------------------------------

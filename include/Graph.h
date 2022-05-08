@@ -24,7 +24,7 @@ class Graph
 public:
     Graph(int rows=11, int cols=11,int level=1);
     void drawTiles(sf::RenderWindow& window);
-    void checkIfClicked(sf::Vector2f mousePs,float);
+    bool checkIfClicked(sf::Vector2f mousePs,float);
     void randomaize(int level);
 
     vector<std::pair<int, int>> assertNum(int size);

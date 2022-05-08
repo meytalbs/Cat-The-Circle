@@ -16,6 +16,7 @@ public:
 	void run();
 	bool isRuning();
 private:
+    bool m_inLimit=false;
     Menu m_menu;
     Graph m_graph;
 	Window m_window;

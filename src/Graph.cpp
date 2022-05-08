@@ -78,7 +78,7 @@ void Graph::drawTiles(sf::RenderWindow& window) {
 // ----------------------------------------------------------------------------
 
 
-void Graph::checkIfClicked(sf::Vector2f mousePos, float deltaTime)
+bool Graph::checkIfClicked(sf::Vector2f mousePos, float deltaTime)
 {
     for (int i = 0; i < m_rows; ++i) {
         for (int j = 0; j < m_cols; j++) {
@@ -98,12 +98,13 @@ void Graph::checkIfClicked(sf::Vector2f mousePos, float deltaTime)
                 }
                 else
                 {              
-                    cout << "limitttt";
+                   return true;
                 }
             }
         }
         
     }
+    return false;
 }
 // ----------------------------------------------------------------------------
 
