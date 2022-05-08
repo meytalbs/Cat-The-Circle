@@ -205,59 +205,54 @@ void Graph::updateNeighborsList() // todo - clean the function
     int factor = 0, x, y;
 
 
-    for (int row = 0; row < m_rows-1; ++row)
+    for (int row = 0; row < m_rows; ++row)
     {
         row % 2 == 0 ? factor =0: factor = 1;
 
 
-        for (int col = 0; col < m_rows-1; ++col)
+        for (int col = 0; col < m_cols; ++col)
         {
             m_tiles[row][col].checkNeighbors();
 
             if (m_tiles[row][col].getColor() == colorId::white)
             {
-                if (row > 0 && col > 0)                                           // up left
+                if (row > 0 && !(col == 0 && factor == 0))                               // up left
                 {
                     x = row - 1;
-                    y = col - (1-factor);                    if(m_tiles[x][y].getColor() != colorId::black)
-                         m_tiles[row][col].addNeighbor(&m_tiles[x][y]);
+                    y = col - (1-factor);                    
+                    m_tiles[row][col].addNeighbor(&m_tiles[x][y]);
                 }
-                if (row > 0 && col < m_cols-1)                                   // up right
+                if (row > 0 && !(col == (m_cols - 1) && factor == 1))                    // up right
                 {
                     x = row - 1;
-                    y = col + (1 - factor);
-                    if(m_tiles[x][y].getColor() != colorId::black)
-                        m_tiles[row][col].addNeighbor(&m_tiles[x][y]);
+                    y = col + factor;
+                    m_tiles[row][col].addNeighbor(&m_tiles[x][y]);
                 }
 
-                if (col > 0)                                                                // left
+                if (col > 0)                                                             // left
                 {
                     y = col - 1;
-                    if(m_tiles[row][y].getColor() != colorId::black)
-                        m_tiles[row][col].addNeighbor(&m_tiles[row][y]);
+                    m_tiles[row][col].addNeighbor(&m_tiles[row][y]);
                 }
 
-                if (col  < m_cols-1)                                                       // right
+                if (col+1 < m_cols)                                                      // right
                 {
                     y = col + 1;
-                    if(m_tiles[row][y].getColor() != colorId::black)
-                        m_tiles[row][col].addNeighbor(&m_tiles[row][y]);
+                    m_tiles[row][col].addNeighbor(&m_tiles[row][y]);
                 }
 
-                if (row  < m_rows-1 && col  > 0)                                  // down left
+                if (row + 1 < m_rows && !(col == 0 && factor == 0))                      // down left
                 {
                     x = row+1 ;
-                    y = col -(factor-1);
-                    if(m_tiles[x][y].getColor() != colorId::black)
-                        m_tiles[row][col].addNeighbor(&m_tiles[x][y]);
+                    y = col - (1 - factor);
+                    m_tiles[row][col].addNeighbor(&m_tiles[x][y]);
                 }
 
-                if (row < m_rows-1 && col  < m_cols-1)                          // down right
+                if (row + 1 < m_rows && !(col == (m_cols -1 ) && factor == 1))           // down right
                 {
                     x = row + 1;
                     y = col +  factor;
-                    if(m_tiles[x][y].getColor() != colorId::black)
-                        m_tiles[row][col].addNeighbor(&m_tiles[x][y]);
+                    m_tiles[row][col].addNeighbor(&m_tiles[x][y]);
                 }
             }
         }
