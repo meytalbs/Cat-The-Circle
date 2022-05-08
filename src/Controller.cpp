@@ -33,8 +33,7 @@ void Controller::run()
                 if (m_menu.clicked(m_window.getWindow().mapPixelToCoords(sf::Mouse::
                     getPosition(m_window.getWindow()))))
                 {                
-                  //  Graph temp;
-                   // m_graph = temp;  //!!check if it dosent make bad things with memory!!
+                    m_graph = Graph();  //!!check if it dosent make bad things with memory!!
                 }
             }
             // "close requested" event: we close the window
@@ -51,8 +50,7 @@ void Controller::run()
         m_menu.updateAndDraw(m_window.getWindow());
         if(m_inLimit)
         {
-         //   Graph temp;
-        //    m_graph = temp;
+            m_graph = Graph();
             m_inLimit=false;
 
         }
