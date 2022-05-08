@@ -53,7 +53,7 @@ bool Tile::clicked(sf::Vector2f mousePos) // todo
 {
     if ((m_sprite).getGlobalBounds().contains(mousePos)&& !m_isClicked)
     {
-        color();
+
         return true;
     }
 
@@ -61,13 +61,7 @@ bool Tile::clicked(sf::Vector2f mousePos) // todo
 }
 // ----------------------------------------------------------------------------
 
-void Tile::color() // todo
-{   
-    (m_sprite).setColor(sf::Color(150, 200, 255));
-    m_isClicked = true;
-    m_color = colorId::black;
-}
-// ----------------------------------------------------------------------------
+
 
 
 void Tile::addNeighbor(Tile *tile) 
@@ -79,6 +73,12 @@ void Tile::addNeighbor(Tile *tile)
 void Tile::setColor(colorId color)
 {
     m_color = color;
+    if(color == colorId::black)
+    {
+        (m_sprite).setColor(sf::Color(150, 200, 255));
+        m_isClicked = true;
+
+    }
 }
 // ----------------------------------------------------------------------------
 

@@ -42,7 +42,7 @@ void Frog::movePos(sf::Vector2<float> pos,float delta )
 void Frog::move(int x,int y)
 {
     
-    m_sprite.setPosition(posToPixels(x,y));
+    m_sprite.setPosition(posToPixels(y,x));
 }
 //------------------------------------------
 sf::Vector2f Frog::posToPixels(int x, int y)

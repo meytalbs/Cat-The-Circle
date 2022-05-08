@@ -5,7 +5,7 @@ Controller::Controller()
     texture = (Resources::instance().getTexture(gameObjectId::boat));
     text.setFont(Resources::instance().getFont());
     text.setPosition(1325,MARGIN_TOP-20);
-    m_graph =Graph(11,11,1);
+   // m_graph =Graph(11,11,1);
 }
 
 void Controller::run() 

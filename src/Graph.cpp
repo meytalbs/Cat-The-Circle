@@ -51,19 +51,28 @@ void Graph::randomaize(int level) // todo
 
     }
 
-    vect=assertNum(size,0,10);//will be chossed according to level
+    vect=assertNum(size,2,9);//will be chossed according to level
 
     for (int i = 0; i < 11; ++i)//!!!!!
     {
-        m_tiles[vect[i].first][vect[i].second].color();
-       // todo
+        m_tiles[vect[i].first][vect[i].second].setColor(colorId::black);
+
+
+        // todo
     }
 
     do {
         vect = assertNum(1, 4, 6);//will be chossed according to level
+
     }
     while(m_tiles[vect[0].first][vect[0].second].getColor()!=colorId::white);
-    frog.move(vect[0].first,vect[0].second);
+
+    if(m_tiles[vect[0].first][vect[0].second].getColor()==colorId::white) {
+        frog.move(vect[0].first, vect[0].second);
+
+    }
+        else
+        frog.move(0,0);
 }
 // ----------------------------------------------------------------------------
 
@@ -99,7 +108,9 @@ bool Graph::checkIfClicked(sf::Vector2f mousePos, float deltaTime)
 {
     for (int i = 0; i < m_rows; ++i) {
         for (int j = 0; j < m_cols; j++) {
-            if (m_tiles[i][j].clicked(mousePos))
+
+            if (m_tiles[i][j].clicked(mousePos) &&
+            !(i == frog.getTile().first && j==frog.getTile().second))
             {
                 ++m_counter; // todo: print counter
 
@@ -176,7 +187,6 @@ Tile* Graph::BFS(Tile * s)
         dest = dest->getFoundBy();
     }
 
-
     return dest;
 }
 // ----------------------------------------------------------------------------
@@ -197,40 +207,46 @@ void Graph::updateNeighborsList() // todo - clean the function
                 if (row > 0 && col - (1-factor) != -1)                                           // up left
                 {
                     x = row - 1; 
-                    y = col - (1-factor);
-                    m_tiles[row][col].addNeighbor(&m_tiles[x][y]);
+                    y = col ;
+                    if(m_tiles[x][y].getColor() != colorId::black)
+                         m_tiles[row][col].addNeighbor(&m_tiles[x][y]);
                 }
                 if (row > 0 && col + (1 - factor) < m_cols)                                   // up right            
                 {
                     x = row - 1;
                     y = col + (1 - factor);
-                    m_tiles[row][col].addNeighbor(&m_tiles[x][y]);
+                    if(m_tiles[x][y].getColor() != colorId::black)
+                        m_tiles[row][col].addNeighbor(&m_tiles[x][y]);
                 }
 
                 if (col > 0)                                                                // left
                 {
                     y = col - 1;
-                    m_tiles[row][col].addNeighbor(&m_tiles[row][y]);
+                    if(m_tiles[row][y].getColor() != colorId::black)
+                        m_tiles[row][col].addNeighbor(&m_tiles[row][y]);
                 }
 
                 if (col + 1 < m_cols)                                                       // right
                 {
                     y = col + 1;
-                    m_tiles[row][col].addNeighbor(&m_tiles[row][y]);
+                    if(m_tiles[row][y].getColor() != colorId::black)
+                        m_tiles[row][col].addNeighbor(&m_tiles[row][y]);
                 }
 
                 if (row + 1 < m_rows && col - factor > -1)                                  // down left
                 {
                     x = row+1 ;
-                    y = col - factor;
-                    m_tiles[row][col].addNeighbor(&m_tiles[x][y]);
+                    y = col ;
+                    if(m_tiles[x][y].getColor() != colorId::black)
+                        m_tiles[row][col].addNeighbor(&m_tiles[x][y]);
                 }
 
                 if (row + 1 < m_rows && col + 1 - factor < m_cols)                          // down right            
                 {
                     x = row + 1;
                     y = col + (1 - factor);
-                    m_tiles[row][col].addNeighbor(&m_tiles[x][y]);
+                    if(m_tiles[x][y].getColor() != colorId::black)
+                        m_tiles[row][col].addNeighbor(&m_tiles[x][y]);
                 }
             }
         }
