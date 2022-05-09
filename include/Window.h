@@ -11,7 +11,7 @@ class Window
 {
 public:
 	Window(const sf::Vector2u windowSize = sf::Vector2u(1400, 1000),
-		   const string title = "Frog Jump");
+		   const string title = "Circle The Frog ");
 	bool isOpen();
 	void closeWindow() { m_window.close(); };
 	void display() { 
