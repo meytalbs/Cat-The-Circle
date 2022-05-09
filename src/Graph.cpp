@@ -4,7 +4,7 @@
 Graph::Graph(int rows, int cols,int level)
     : m_rows(rows), m_cols(cols)
 {
-    m_tiles.reserve(m_rows * m_cols); // todo - using operator * on 4 byte value....
+    m_tiles.reserve(m_rows * m_cols); 
     bool isLimit;
 
    for (int i = 0; i < m_rows ; ++i) {
@@ -18,18 +18,15 @@ Graph::Graph(int rows, int cols,int level)
 
             if(i%2==0 )
                 temp.push_back(Tile(sf::Vector2f(MARGIN_RIGHT + SPACE * j-40,
-                                                              MARGIN_TOP+ SPACE * i ), 0.4, isLimit,i,j));
-            
+                                                              MARGIN_TOP+ SPACE * i ), 0.4, isLimit,i,j));            
             else
                 temp.push_back(Tile(sf::Vector2f(MARGIN_RIGHT + SPACE * j,
                                                               MARGIN_TOP + SPACE * i), 0.4, isLimit,i,j));
-
         }
         m_tiles.push_back(std::move(temp));
     }
     
-   randomaize(level);
-   
+   randomaize(level);   
    updateNeighborsList();
 }
 // ----------------------------------------------------------------------------
@@ -48,7 +45,6 @@ void Graph::randomaize(int level) // todo
                 break;
         case 3: size =4;
                 break;
-
     }
 
     vect=assertNum(size,2,9);//will be chossed according to level
@@ -56,8 +52,6 @@ void Graph::randomaize(int level) // todo
     for (int i = 0; i < 11; ++i)//!!!!!
     {
         m_tiles[vect[i].first][vect[i].second].setColor(colorId::black);
-
-
         // todo
     }
 
@@ -219,6 +213,8 @@ Tile* Graph::getFreeTile(Tile* s)
     m_gameOver = true;
     return nullptr;
 }
+// ----------------------------------------------------------------------------
+
 
 void Graph::updateNeighborsList() // todo - clean the function
 {

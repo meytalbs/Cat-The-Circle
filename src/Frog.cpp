@@ -8,7 +8,8 @@ Frog::Frog() {
 
     m_sprite.scale(1, 1);    
 }
-//------------------------------------------
+// ----------------------------------------------------------------------------
+
 
 void Frog::updateAndDraw(sf::RenderWindow& window)
 {
@@ -18,6 +19,7 @@ void Frog::updateAndDraw(sf::RenderWindow& window)
     window.draw(m_sprite);
 
 }
+// ----------------------------------------------------------------------------
 
 
 std::pair<int,int> Frog::getTile()const
@@ -30,21 +32,25 @@ std::pair<int,int> Frog::getTile()const
 
     return pos;
 }
-//------------------------------------------
+// ----------------------------------------------------------------------------
+
+
 void Frog::movePos(sf::Vector2<float> pos,float delta )
 {
     auto dir = pos - m_sprite.getPosition();
 
-       m_sprite.setPosition(pos);
-
-    
+       m_sprite.setPosition(pos);    
 }
+// ----------------------------------------------------------------------------
+
+
 void Frog::move(int x,int y)
-{
-    
+{    
     m_sprite.setPosition(posToPixels(x,y));
 }
-//------------------------------------------
+// ----------------------------------------------------------------------------
+
+
 sf::Vector2f Frog::posToPixels(int x, int y)
 {
     sf::Vector2f pos;
@@ -59,3 +65,4 @@ sf::Vector2f Frog::posToPixels(int x, int y)
 
     return pos;
 }
+// ----------------------------------------------------------------------------

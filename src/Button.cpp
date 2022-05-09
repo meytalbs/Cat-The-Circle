@@ -15,6 +15,8 @@ Button::Button(float x, float y, float width, float height,
     this->m_shape.setFillColor(this->m_idleColor);
     m_pressed = false;
 }
+// ----------------------------------------------------------------------------
+
 
 void Button::update(sf::Vector2f mousePos)
 {
@@ -43,11 +45,15 @@ void Button::update(sf::Vector2f mousePos)
         }
     }
 }
+// ----------------------------------------------------------------------------
+
 
 void Button::quit()
 {
     m_pressed = false;
 }
+// ----------------------------------------------------------------------------
+
 
 bool Button::isPressed(sf::Vector2f mousePos)
 {
@@ -58,3 +64,4 @@ bool Button::isPressed(sf::Vector2f mousePos)
 
     return false;
 }
+// ----------------------------------------------------------------------------

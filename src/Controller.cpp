@@ -7,6 +7,8 @@ Controller::Controller()
     text.setPosition(1325,MARGIN_TOP-20);
    // m_graph =Graph(11,11,1);
 }
+// ----------------------------------------------------------------------------
+
 
 void Controller::run() 
 {
@@ -62,8 +64,11 @@ void Controller::run()
         m_window.display();
 	}
 }
+// ----------------------------------------------------------------------------
+
 
 bool Controller :: isRuning()
 {
     return m_isRuning;
 }
+// ----------------------------------------------------------------------------

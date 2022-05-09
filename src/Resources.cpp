@@ -1,4 +1,5 @@
 #include "Resources.h"
+
 Resources::Resources() {
     if (!m_font.loadFromFile("arcadeClassic.ttf")) {
         // error...
@@ -11,7 +12,7 @@ Resources::Resources() {
   //  buildMusic();
     //add sound
 }
-
+// ----------------------------------------------------------------------------
 
 void Resources::buildTexture() {
     for(int i=0;i<m_imagePath.size();i++) {
@@ -27,17 +28,20 @@ void Resources::buildTexture() {
         */
     }
 }
+// ----------------------------------------------------------------------------
 
 sf::Texture* Resources::getTexture(gameObjectId id)
 {
     return &m_texture[(int)id];
-
 }
+// ----------------------------------------------------------------------------
+
 sf::Sprite* Resources::getSprite(gameObjectId id) 
 {
     return &m_sprite[(int)id];
 
 }
+// ----------------------------------------------------------------------------
 
 void Resources::buildSprite()
 {
@@ -54,14 +58,19 @@ void Resources::buildSprite()
 
     }
 }
+// ----------------------------------------------------------------------------
+
 sf::Font& Resources::getFont()
 {
     return m_font;
 }
+// ----------------------------------------------------------------------------
+
 Resources& Resources:: instance(){
     static auto resources=Resources();
     return resources;
 }
+// ----------------------------------------------------------------------------
 
 
 /*

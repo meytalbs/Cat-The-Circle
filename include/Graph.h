@@ -17,8 +17,6 @@ using std::vector;
 using std::unique_ptr;
 using std::make_unique;
 
-//will act like "board" will contain a vector of vector of tiles
-
 class Graph 
 {
 public:
@@ -26,20 +24,19 @@ public:
     void drawTiles(sf::RenderWindow& window);
     bool checkIfClicked(sf::Vector2f mousePs,float);
     void randomaize(int level);
-
-    vector<std::pair<int, int>> assertNum(int size, int a , int b);
-
     void updateNeighborsList();
-    Tile* BFS(Tile* s);
     int getCounter() { return m_counter; };
-    Tile* getFreeTile(Tile* s);
-private:
-    Frog frog;//should move it to vector
 
+    vector<std::pair<int, int>> assertNum(int size, int a ,int b);
+    Tile* BFS(Tile* s);
+    Tile* getFreeTile(Tile* s);
+
+private:
+    Frog frog;    //should move it to vector
     vector<vector<Tile>> m_tiles; 
     vector<Tile*> m_limits;
-    int m_rows ;
-    int m_cols ;
+    int m_rows;
+    int m_cols;
     int m_counter = 0;
     bool m_gameOver = false;
 };

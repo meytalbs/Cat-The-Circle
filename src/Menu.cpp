@@ -1,7 +1,3 @@
-//
-// Created by Bar Oren on 29/04/2022.
-//
-
 #include "Menu.h"
 
 Menu::Menu()
@@ -15,16 +11,17 @@ Menu::Menu()
     for(int i =0 ;i<m_sprite.size() ;i++) {
         (m_sprite[i]).setPosition(sf::Vector2f(1300,MARGIN_TOP+800*i));//
     }
-
 }
-//-------------------------------------------
+// ----------------------------------------------------------------------------
+
 void Menu::updateAndDraw(sf::RenderWindow& window)
 {
     for(int i =0 ;i<m_sprite.size() ;i++) {
         window.draw(m_sprite[i]);
     }
 }
-//-------------------------------------------
+// ----------------------------------------------------------------------------
+
 bool Menu::clicked(sf::Vector2f mousePos) // todo
 {
     if (m_sprite[1].getGlobalBounds().contains(mousePos))
@@ -32,6 +29,7 @@ bool Menu::clicked(sf::Vector2f mousePos) // todo
         return true;
     }
 }
+// ----------------------------------------------------------------------------
 
 void Menu::hover(sf::Vector2f mousePos)
 {
@@ -42,3 +40,4 @@ void Menu::hover(sf::Vector2f mousePos)
         m_sprite[1].setColor(sf::Color(255, 255, 255));
 
 }
+// ----------------------------------------------------------------------------
