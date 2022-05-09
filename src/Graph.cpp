@@ -4,7 +4,7 @@
 Graph::Graph(int rows, int cols,int level)
     : m_rows(rows), m_cols(cols)
 {
-    m_tiles.reserve(m_rows * m_cols); 
+    m_tiles.reserve(m_rows * m_cols);
     bool isLimit;
 
    for (int i = 0; i < m_rows ; ++i) {
@@ -18,7 +18,7 @@ Graph::Graph(int rows, int cols,int level)
 
             if(i%2==0 )
                 temp.push_back(Tile(sf::Vector2f(MARGIN_RIGHT + SPACE * j-40,
-                                                              MARGIN_TOP+ SPACE * i ), 0.4, isLimit,i,j));            
+                                                              MARGIN_TOP+ SPACE * i ), 0.4, isLimit,i,j));
             else
                 temp.push_back(Tile(sf::Vector2f(MARGIN_RIGHT + SPACE * j,
                                                               MARGIN_TOP + SPACE * i), 0.4, isLimit,i,j));
@@ -26,7 +26,7 @@ Graph::Graph(int rows, int cols,int level)
         m_tiles.push_back(std::move(temp));
     }
     
-   randomaize(level);   
+   randomaize(level);
    updateNeighborsList();
 }
 // ----------------------------------------------------------------------------
@@ -34,22 +34,22 @@ Graph::Graph(int rows, int cols,int level)
 
 void Graph::randomaize(int level) // todo
 {
-    int size;
+    int size,a,b;
     vector<std::pair<int, int>> vect;
 
     switch(level)
     {
-        case 1 : size =14; // todo
+        case 1 : size =14;a =3;b=8; // todo
                 break;
-        case 2: size = 8;
+        case 2: size = 8;a =3;b=6;
                 break;
-        case 3: size =4;
+        case 3: size =4 ;a=0;b=9;
                 break;
     }
 
-    vect=assertNum(size,2,9);//will be chossed according to level
+    vect=assertNum(size,a,b);//will be chossed according to level
 
-    for (int i = 0; i < 11; ++i)//!!!!!
+    for (int i = 0; i < size; ++i)//!!!!!
     {
         m_tiles[vect[i].first][vect[i].second].setColor(colorId::black);
         // todo
@@ -66,8 +66,7 @@ void Graph::randomaize(int level) // todo
         m_history.push_back(&m_tiles[vect[0].first][vect[0].second]); // todo
 
     }
-        else
-        frog.move(0,0);
+
 }
 // ----------------------------------------------------------------------------
 
@@ -105,13 +104,10 @@ bool Graph::checkIfClicked(sf::Vector2f mousePos, float deltaTime)
     for (int i = 0; i < m_rows; ++i) {
         for (int j = 0; j < m_cols; j++) {
 
-            if (m_gameOver)
-                std::cout << "game over"; // todo - show secces
-
             if (m_tiles[i][j].clicked(mousePos) &&
             !(i == frog.getTile().first && j==frog.getTile().second))
-            {               
-                ++m_counter; 
+            {
+                ++m_counter;
 
                 m_tiles[i][j].setColor(colorId::black); // todo
                 //cout<< "I :" << i<<j << int(m_tiles[i][j].getColor());
@@ -127,15 +123,17 @@ bool Graph::checkIfClicked(sf::Vector2f mousePos, float deltaTime)
                         m_history.push_back(nextTile); // todo
                     }
                 }
-                else // why??
-                {              
+                else // why??- if loose
+                {
+                    cout <<"Loose";
                    return true;
                 }
-                
+
             }
         }
         
     }
+
     return false;
 }
 // ----------------------------------------------------------------------------
@@ -183,7 +181,7 @@ Tile* Graph::BFS(Tile * s)
                 (*it)->setColor(colorId::gray);
                 queue.push_back(*it);
             }
-        }  
+        }
     }
 
     if (!dest || !dest->getFoundBy())
@@ -196,7 +194,7 @@ Tile* Graph::BFS(Tile * s)
     while (dest->getFoundBy() != s)
     {
         dest = dest->getFoundBy();
-    } 
+    }
 
     return dest;
 }

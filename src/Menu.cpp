@@ -4,28 +4,44 @@ Menu::Menu()
 {
     m_texture.push_back(Resources::instance().getTexture(gameObjectId::moves));
     m_texture.push_back(Resources::instance().getTexture(gameObjectId::reset));
+    m_texture.push_back(Resources::instance().getTexture(gameObjectId::nextLevel));
+    m_texture.push_back(Resources::instance().getTexture(gameObjectId::x));
 
     m_sprite.push_back(*Resources::instance().getSprite(gameObjectId::moves));
     m_sprite.push_back(*Resources::instance().getSprite(gameObjectId::reset));
+    m_sprite.push_back(*Resources::instance().getSprite(gameObjectId::x));
+    m_sprite.push_back(*Resources::instance().getSprite(gameObjectId::nextLevel));
 
-    for(int i =0 ;i<m_sprite.size() ;i++) {
+
+    for(int i =0 ;i<m_sprite.size()-2 ;i++) {
         (m_sprite[i]).setPosition(sf::Vector2f(1300,MARGIN_TOP+800*i));//
     }
+    (m_sprite[2]).setPosition(sf::Vector2f(40,40));//!! to do
+
+    (m_sprite[3]).setPosition(sf::Vector2f(700,500));//!! to do
 }
 // ----------------------------------------------------------------------------
 
 void Menu::updateAndDraw(sf::RenderWindow& window)
 {
-    for(int i =0 ;i<m_sprite.size() ;i++) {
+    for(int i =0 ;i<m_sprite.size()-1 ;i++) {
         window.draw(m_sprite[i]);
     }
 }
+void Menu::drawSpacificButton(sf::RenderWindow& window,menu i)
+{
+
+        window.draw(m_sprite[int(i)]);
+
+}
 // ----------------------------------------------------------------------------
 
-bool Menu::clicked(sf::Vector2f mousePos) // todo
+bool Menu::clicked(sf::Vector2f mousePos, menu i) // todo
 {
-    if (m_sprite[1].getGlobalBounds().contains(mousePos))
+    cout << int (i)<<endl;
+    if (m_sprite[int(i)].getGlobalBounds().contains(mousePos))
     {
+
         return true;
     }
 }
