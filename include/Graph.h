@@ -26,7 +26,7 @@ public:
     void randomaize(int level);
     void updateNeighborsList();
     int getCounter() { return m_counter; };
-
+    bool isGameOver(){return m_gameOver;};
     vector<std::pair<int, int>> assertNum(int size, int a ,int b);
     Tile* BFS(Tile* s);
     Tile* getFreeTile(Tile* s);

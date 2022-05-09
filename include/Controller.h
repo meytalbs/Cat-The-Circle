@@ -17,15 +17,16 @@ class Controller
 public:
 	Controller();
 	void run();
-	bool isRuning();
 
 private:
     Menu m_menu;
     Graph m_graph;
 	Window m_window;
-
+    int m_level =1;
 	sf::Texture* texture;
     sf::Text text;
 	bool m_isRuning = true;
     bool m_inLimit = false;
+
+    void showScreen(const sf::Event &event, bool isGameOver,string t,menu show);
 };
