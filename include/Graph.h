@@ -32,6 +32,7 @@ public:
     void updateNeighborsList();
     Tile* BFS(Tile* s);
     int getCounter() { return m_counter; };
+    Tile* getFreeTile(Tile* s);
 private:
     Frog frog;//should move it to vector
 
@@ -40,4 +41,5 @@ private:
     int m_rows ;
     int m_cols ;
     int m_counter = 0;
+    bool m_gameOver = false;
 };

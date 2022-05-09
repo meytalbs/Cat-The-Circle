@@ -42,7 +42,7 @@ void Graph::randomaize(int level) // todo
 
     switch(level)
     {
-        case 1 : size =14;
+        case 1 : size =14; // todo
                 break;
         case 2: size = 8;
                 break;
@@ -109,26 +109,29 @@ bool Graph::checkIfClicked(sf::Vector2f mousePos, float deltaTime)
     for (int i = 0; i < m_rows; ++i) {
         for (int j = 0; j < m_cols; j++) {
 
+            if (m_gameOver)
+                std::cout << "game over"; // todo - show secces
+
             if (m_tiles[i][j].clicked(mousePos) &&
             !(i == frog.getTile().first && j==frog.getTile().second))
-            {
-                ++m_counter; // todo: print counter
+            {               
+                ++m_counter; 
 
-                //updateNeighborsList();
                 m_tiles[i][j].setColor(colorId::black); // todo
-                cout<< "I :" << i<<j << int(m_tiles[i][j].getColor());
+                //cout<< "I :" << i<<j << int(m_tiles[i][j].getColor());
                 //maybe should return true and then bfs algo
                 std::pair<int, int> pos = frog.getTile();
                 if (!(&m_tiles[pos.first][pos.second])->isLimit())
                 {
-                    cout << "x"<<pos.first<<"y"<<pos.second<<endl;
+                    //cout << "x"<<pos.first<<"y"<<pos.second<<endl;
                     Tile* nextTile = BFS(&m_tiles[pos.first][pos.second]);
-                    frog.movePos(nextTile->getLocation(),deltaTime);
+                    if (nextTile) frog.movePos(nextTile->getLocation(), deltaTime);
                 }
-                else
+                else // why??
                 {              
                    return true;
                 }
+                
             }
         }
         
@@ -145,14 +148,13 @@ Tile* Graph::BFS(Tile * s)
     bool isLimit = false;
 
 
-cout<<"Start";
     // Coloring all the vertices in white
    for (int row = 0; row < m_rows; ++row)
         for (int col = 0; col < m_rows; ++col)
             if (colorId::black != m_tiles[row][col].getColor())
                 m_tiles[row][col].setColor(colorId::white);
 
-    updateNeighborsList();
+    //updateNeighborsList();
     // Create a queue for BFS   
     std::list<Tile *> queue;
 
@@ -180,25 +182,43 @@ cout<<"Start";
                 (*it)->setFoundBy(currentTile);
                 (*it)->setColor(colorId::gray);
                 queue.push_back(*it);
-                std::cout << " col: " << (*it)->m_col << " row: " << (*it)->m_row << "\n";
-
-            }
-            else {
-
             }
         }  
+    }
+
+    if (!dest || !dest->getFoundBy())
+    {
+        dest = getFreeTile(s);
+        return dest;
     }
 
     // find the next tile    
     while (dest->getFoundBy() != s)
     {
         dest = dest->getFoundBy();
-    }
+    } 
 
     return dest;
 }
 // ----------------------------------------------------------------------------
 
+
+Tile* Graph::getFreeTile(Tile* s)
+{
+    std::list<Tile*>::iterator it;
+    auto currentTile = s;
+
+    for (it = currentTile->getBegin(); it != currentTile->getEnd(); ++it)
+    {
+        if ((*it)->getColor() != colorId::black)
+        {
+            return *it;
+        }
+    }
+
+    m_gameOver = true;
+    return nullptr;
+}
 
 void Graph::updateNeighborsList() // todo - clean the function
 {
