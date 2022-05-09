@@ -223,6 +223,9 @@ void Graph::undo()
         m_history.back().first->setColor(colorId::white);
         frog.move(m_history.back().second.first, m_history.back().second.second);
         m_history.pop_back();
+        --m_counter;
+
+
     }
 }
 

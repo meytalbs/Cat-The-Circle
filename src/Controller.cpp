@@ -120,17 +120,3 @@ void Controller::showScreen(const sf::Event &event, bool isGameOver ,string t,me
 
 
 
-// ----------------------------------------------------------------------------
-/*  text.setPosition(700,500);
-                text.setString("winner  winner  chicken  dinner in " +std::to_string(m_graph.getCounter()) + " moves");
-                m_window.getWindow().draw(text);//!!check if it dosent make bad things with memory!!
-                m_menu.drawSpacificButton(m_window.getWindow(),2);
-            if (event.type == sf::Event::MouseButtonPressed) {
-                if (m_menu.clicked(m_window.getWindow().mapPixelToCoords(sf::Mouse::
-                                                                         getPosition(m_window.getWindow())), 2)) {
-                    level++;
-                    if(level>3)
-                        level=1;
-                    m_graph = Graph(11, 11, level);  //!!check if it dosent make bad things with memory!!
-                }
-            }*/

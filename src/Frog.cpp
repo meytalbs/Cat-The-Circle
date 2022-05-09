@@ -55,8 +55,8 @@ sf::Vector2f Frog::posToPixels(int x, int y)
 {
     sf::Vector2f pos;
 
-    if (y % 2 == 0) {
-        pos=sf::Vector2f(MARGIN_RIGHT - 40 + SPACE * y,
+    if (x % 2 == 0) {
+        pos=sf::Vector2f(MARGIN_RIGHT -40  + SPACE * y,
             MARGIN_TOP + SPACE * x);
     }
     else
