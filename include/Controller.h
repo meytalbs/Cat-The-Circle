@@ -29,4 +29,8 @@ private:
     bool m_inLimit = false;
 
     void showScreen(const sf::Event &event, bool isGameOver,string t,menu show);
+
+    void handleRegularClick(float delta, const sf::Event &event);
+
+    void drawScreen(const sf::Sprite &boat);
 };
