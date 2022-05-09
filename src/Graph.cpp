@@ -100,7 +100,7 @@ void Graph::drawTiles(sf::RenderWindow& window)
 // ----------------------------------------------------------------------------
 
 
-bool Graph::checkIfClicked(sf::Vector2f mousePos, float deltaTime)
+bool Graph::checkIfClicked(sf::Vector2f mousePos)
 {
     for (int i = 0; i < m_rows; ++i) {
         for (int j = 0; j < m_cols; j++) {
@@ -118,7 +118,7 @@ bool Graph::checkIfClicked(sf::Vector2f mousePos, float deltaTime)
                 if (!(&m_tiles[pos.first][pos.second])->isLimit())
                 {
                     Tile* nextTile = BFS(&m_tiles[pos.first][pos.second]);
-                    if (nextTile) frog.movePos(nextTile->getLocation(), deltaTime);                       
+                    if (nextTile) frog.movePos(nextTile->getLocation());
                 }
                 else
                    return true;

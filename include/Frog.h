@@ -17,7 +17,7 @@ public:
     Frog();
     void updateAndDraw(sf::RenderWindow& window);
     void move(int ,int);
-    void movePos(sf::Vector2<float>, float);
+    void movePos(sf::Vector2<float>);
     sf::Vector2f posToPixels(int, int);
     std::pair<int, int> getTile() const;
 

@@ -33,7 +33,7 @@ Menu::Menu()
 
 void Menu::updateAndDraw(sf::RenderWindow& window)
 {
-    for(int i =0 ;i<3;i++) {
+    for(int i =0 ;i<4;i++) {
         window.draw(m_sprite[i]);
     }
 }

@@ -13,11 +13,7 @@ Frog::Frog() {
 
 void Frog::updateAndDraw(sf::RenderWindow& window)
 {
-    //m_animation->update(row,deltaTime);
-   // m_sprite.setTextureRect(m_animation->getRect());
-
     window.draw(m_sprite);
-
 }
 // ----------------------------------------------------------------------------
 
@@ -35,9 +31,8 @@ std::pair<int,int> Frog::getTile()const
 // ----------------------------------------------------------------------------
 
 
-void Frog::movePos(sf::Vector2<float> pos,float delta )
+void Frog::movePos(sf::Vector2<float> pos )
 {
-    auto dir = pos - m_sprite.getPosition();
 
        m_sprite.setPosition(pos);    
 }

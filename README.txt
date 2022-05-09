@@ -116,10 +116,11 @@ README.txt
 
 
 8. Known Bugs 
-
+none that we know of .
 
 9. Other Comments 
 # We made sure that the frog did not appear exactly in the middle but in the range 
   of the tiles that were relatively in the middle to add interest
+# the randomization of the tiles are based on range to make it more dynamic.
 
 # Hope you will enjoy to play :)

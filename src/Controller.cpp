@@ -11,7 +11,6 @@ Controller::Controller()
 
 void Controller::run() 
 {
-    sf::Clock clock;
     sf::Sprite boat;
  
     boat.setTexture(*texture);
@@ -21,7 +20,6 @@ void Controller::run()
 	while (m_window.isOpen()) {
         text.setPosition(1325, MARGIN_TOP - 20);
 
-        float delta = clock.restart().asSeconds() * 60;///temp;
         int x, y;
         sf::Mouse mouse;
         sf::Event event;
@@ -42,7 +40,7 @@ void Controller::run()
                            menu::restartScreen);
             } else {//working state
 
-                handleRegularClick(delta, event);
+                handleRegularClick(event);
                 drawScreen(boat);
 
             }
@@ -64,12 +62,12 @@ void Controller::drawScreen(const sf::Sprite &boat) {
     m_window.getWindow().draw(text);
 }
 
-void Controller::handleRegularClick(float delta, const sf::Event &event) {
+void Controller::handleRegularClick( const sf::Event &event) {
     if (event.type == sf::Event::MouseButtonPressed) {
         // boat.setColor(sf::Color(150, 200, 255));
         m_inLimit = m_graph.checkIfClicked(m_window.getWindow().mapPixelToCoords(sf::Mouse::
                                                                                  getPosition(
-                m_window.getWindow())), delta);
+                m_window.getWindow())));
 
         if (m_menu.clicked(m_window.getWindow().mapPixelToCoords(sf::Mouse::
                                                                  getPosition(m_window.getWindow())),
