@@ -83,6 +83,10 @@ void Controller::handleRegularClick(float delta, const sf::Event &event) {
 
             m_window.getWindow().close();  //!!check if it dosent make bad things with memory!!
         }
+        if (m_menu.clicked(m_window.getWindow().mapPixelToCoords(sf::Mouse::
+                                                                 getPosition(m_window.getWindow())),
+                           menu::undo))
+            m_graph.undo();
     }
     // "close requested" event: we close the window
     if (event.type == sf::Event::Closed)

@@ -66,6 +66,11 @@ void Tile::setColor(colorId color)
     {
         (m_sprite).setColor(sf::Color(150, 200, 255));
         m_isClicked = true;
+    }if(color == colorId::white)
+    {
+        (m_sprite).setColor(sf::Color(255, 255, 255));
+        m_isClicked = false;
+
     }
 }
 // ----------------------------------------------------------------------------

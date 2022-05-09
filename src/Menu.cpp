@@ -4,21 +4,26 @@ Menu::Menu()
 {
     m_texture.push_back(Resources::instance().getTexture(gameObjectId::moves));
     m_texture.push_back(Resources::instance().getTexture(gameObjectId::reset));
+    m_texture.push_back(Resources::instance().getTexture(gameObjectId::undo));
+
     m_texture.push_back(Resources::instance().getTexture(gameObjectId::nextLevel));
     m_texture.push_back(Resources::instance().getTexture(gameObjectId::x));
 
     m_sprite.push_back(*Resources::instance().getSprite(gameObjectId::moves));
+    m_sprite.push_back(*Resources::instance().getSprite(gameObjectId::undo));
+
     m_sprite.push_back(*Resources::instance().getSprite(gameObjectId::reset));
+
     m_sprite.push_back(*Resources::instance().getSprite(gameObjectId::x));
     m_sprite.push_back(*Resources::instance().getSprite(gameObjectId::nextLevel));
 
 
     for(int i =0 ;i<m_sprite.size()-2 ;i++) {
-        (m_sprite[i]).setPosition(sf::Vector2f(1300,MARGIN_TOP+800*i));//
+        (m_sprite[i]).setPosition(sf::Vector2f(1300,MARGIN_TOP+400*i));//
     }
-    (m_sprite[2]).setPosition(sf::Vector2f(40,40));//!! to do
+    (m_sprite[3]).setPosition(sf::Vector2f(40,40));//!! to do
 
-    (m_sprite[3]).setPosition(sf::Vector2f(700,500));//!! to do
+    (m_sprite[4]).setPosition(sf::Vector2f(700,500));//!! to do
 }
 // ----------------------------------------------------------------------------
 
@@ -49,11 +54,12 @@ bool Menu::clicked(sf::Vector2f mousePos, menu i) // todo
 
 void Menu::hover(sf::Vector2f mousePos)
 {
-    if ((m_sprite[1]).getGlobalBounds().contains(mousePos))
-    {
-        m_sprite[1].setColor(sf::Color(150, 200, 255));
-    }else
-        m_sprite[1].setColor(sf::Color(255, 255, 255));
+    for(int i=1 ;i <3;i++)
+        if ((m_sprite[i]).getGlobalBounds().contains(mousePos))
+        {
+            m_sprite[i].setColor(sf::Color(150, 200, 255));
+        }else
+            m_sprite[i].setColor(sf::Color(255, 255, 255));
 
 }
 // ----------------------------------------------------------------------------

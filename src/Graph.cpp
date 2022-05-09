@@ -108,6 +108,11 @@ bool Graph::checkIfClicked(sf::Vector2f mousePos, float deltaTime)
                 ++m_counter;
 
                 m_tiles[i][j].setColor(colorId::black); // todo
+                //m_history.push(m_tiles[i][j],frog.getTile());
+                std::pair<Tile *, std::pair<int,int>> temp (&m_tiles[i][j],frog.getTile());
+                m_history.push_back(temp);
+
+
                 //cout<< "I :" << i<<j << int(m_tiles[i][j].getColor());
                 //maybe should return true and then bfs algo
                 std::pair<int, int> pos = frog.getTile();
@@ -211,6 +216,16 @@ Tile* Graph::getFreeTile(Tile* s)
     m_gameOver = true;
     return nullptr;
 }
+// ----------------------------------------------------------------------------
+void Graph::undo()
+{
+    if(!m_history.empty()) {
+        m_history.back().first->setColor(colorId::white);
+        frog.move(m_history.back().second.first, m_history.back().second.second);
+        m_history.pop_back();
+    }
+}
+
 // ----------------------------------------------------------------------------
 
 
