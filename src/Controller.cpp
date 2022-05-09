@@ -38,8 +38,8 @@ void Controller::run()
             } else if (m_inLimit)//lose
             {
                 showScreen(event, false,
-                           "loser  Loser   you are a snoozer :  " + std::to_string(m_graph.getCounter()) + " moves",
-                           menu::nextLevel);
+                           "loser  Loser   you are a snoozer in   " + std::to_string(m_graph.getCounter()) + " moves",
+                           menu::restartScreen);
             } else {//working state
 
                 handleRegularClick(delta, event);
@@ -95,7 +95,7 @@ void Controller::handleRegularClick(float delta, const sf::Event &event) {
 }
 
 void Controller::showScreen(const sf::Event &event, bool isGameOver ,string t,menu show) {
-    text.setPosition(300, 450);
+    text.setPosition(400, 450);
     text.setString(t);
 
     m_window.getWindow().draw(text);//!!check if it dosent make bad things with memory!!

@@ -36,9 +36,9 @@ private:
   //  void buildAnimation();
   //  void buildMusic();
     sf::Texture m_temp;
-    std::array <sf::Sprite, 8> m_sprite;//why arr and not vector ?
-    std::array <sf::Texture, 8> m_texture;
-    vector <string> m_imagePath = {"Boat","moves","Reset","Tile","staticFrog","nextLevel","X","undo"};
+    std::array <sf::Sprite, numOfSprites> m_sprite;//why arr and not vector ?
+    std::array <sf::Texture, numOfSprites> m_texture;
+    vector <string> m_imagePath = {"Boat","moves","Reset","Tile","staticFrog","nextLevel","X","undo","restart"};
     //vector <string> m_musicNames={"MainMenuMusic.ogg"};
    // vector<Animation *> m_animation;
     //sf::Music m_music;

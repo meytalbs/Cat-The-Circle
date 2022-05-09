@@ -8,6 +8,7 @@ Menu::Menu()
 
     m_texture.push_back(Resources::instance().getTexture(gameObjectId::nextLevel));
     m_texture.push_back(Resources::instance().getTexture(gameObjectId::x));
+    m_texture.push_back(Resources::instance().getTexture(gameObjectId::restartScreen));
 
     m_sprite.push_back(*Resources::instance().getSprite(gameObjectId::moves));
     m_sprite.push_back(*Resources::instance().getSprite(gameObjectId::undo));
@@ -16,20 +17,23 @@ Menu::Menu()
 
     m_sprite.push_back(*Resources::instance().getSprite(gameObjectId::x));
     m_sprite.push_back(*Resources::instance().getSprite(gameObjectId::nextLevel));
+    m_sprite.push_back(*Resources::instance().getSprite(gameObjectId::restartScreen));
 
 
-    for(int i =0 ;i<m_sprite.size()-2 ;i++) {
+    for(int i =0 ;i<3 ;i++) {
         (m_sprite[i]).setPosition(sf::Vector2f(1300,MARGIN_TOP+400*i));//
     }
-    (m_sprite[3]).setPosition(sf::Vector2f(40,40));//!! to do
+    (m_sprite[int(menu::close)]).setPosition(sf::Vector2f(40,40));//!! to do
 
-    (m_sprite[4]).setPosition(sf::Vector2f(700,500));//!! to do
+    (m_sprite[int(menu::restartScreen)]).setPosition(sf::Vector2f(700,500));//!! to do
+
+    (m_sprite[int(menu::nextLevel)]).setPosition(sf::Vector2f(700,500));//!! to do
 }
 // ----------------------------------------------------------------------------
 
 void Menu::updateAndDraw(sf::RenderWindow& window)
 {
-    for(int i =0 ;i<m_sprite.size()-1 ;i++) {
+    for(int i =0 ;i<3;i++) {
         window.draw(m_sprite[i]);
     }
 }
