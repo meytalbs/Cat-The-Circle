@@ -35,6 +35,7 @@ private:
     Frog frog;    //should move it to vector
     vector<vector<Tile>> m_tiles; 
     vector<Tile*> m_limits;
+    std::list<Tile*> m_history; // todo
     int m_rows;
     int m_cols;
     int m_counter = 0;

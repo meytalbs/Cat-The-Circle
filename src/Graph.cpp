@@ -63,6 +63,7 @@ void Graph::randomaize(int level) // todo
 
     if(m_tiles[vect[0].first][vect[0].second].getColor()==colorId::white) {
         frog.move(vect[0].first, vect[0].second);
+        m_history.push_back(&m_tiles[vect[0].first][vect[0].second]); // todo
 
     }
         else
@@ -87,7 +88,8 @@ vector<std::pair<int, int>> Graph:: assertNum(int size,int a,int b) // todo
 // ----------------------------------------------------------------------------
 
 
-void Graph::drawTiles(sf::RenderWindow& window) {
+void Graph::drawTiles(sf::RenderWindow& window) 
+{
     for (int i = 0; i < m_rows; ++i) {
         for (int j = 0; j < m_cols; j++) {
             m_tiles[i][j].updateAndDraw(window);
@@ -119,7 +121,11 @@ bool Graph::checkIfClicked(sf::Vector2f mousePos, float deltaTime)
                 {
                     //cout << "x"<<pos.first<<"y"<<pos.second<<endl;
                     Tile* nextTile = BFS(&m_tiles[pos.first][pos.second]);
-                    if (nextTile) frog.movePos(nextTile->getLocation(), deltaTime);
+                    if (nextTile) 
+                    { 
+                        frog.movePos(nextTile->getLocation(), deltaTime);
+                        m_history.push_back(nextTile); // todo
+                    }
                 }
                 else // why??
                 {              
