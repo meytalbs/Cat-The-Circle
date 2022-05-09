@@ -14,7 +14,7 @@ class Menu
 public:
     Menu();
     void  updateAndDraw(sf::RenderWindow& window);
-    bool clicked(sf::Vector2f mousePos, menu i);// todo
+    bool clicked(sf::Vector2f mousePos, menu i);
     void hover(sf::Vector2f mousePos);
     void drawSpacificButton(sf::RenderWindow& window,menu i);
 

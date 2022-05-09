@@ -94,7 +94,7 @@ README.txt
   Holds pointers for tiles that are within the boundaries of the graph (frame). 
   Used to identify a target for the BFS algorithm
 
-# DB for game history // *************************************
+# DB for game history - std::list<std::pair<Tile *, std::pair<int,int>>> m_history
   Save the moves made during the game, so that we can go back to the previous situation.
 
 # std::array <sf::Sprite, 9> m_sprite

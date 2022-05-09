@@ -34,7 +34,7 @@ public:
 
 private:
     std::list<std::pair<Tile *, std::pair<int,int>>> m_history;
-    Frog frog;    //should move it to vector
+    Frog frog;    
     vector<vector<Tile>> m_tiles; 
     vector<Tile*> m_limits;
     int m_rows;

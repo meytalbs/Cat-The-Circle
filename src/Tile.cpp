@@ -6,7 +6,7 @@ using std::endl;
 Tile::Tile(const  sf::Vector2f position, float scale, bool isLimit, int row, int col) :
     m_isLimit(isLimit)
 {
-    m_texture = Resources::instance().getTexture(gameObjectId::tile); // why do we need it?
+    m_texture = Resources::instance().getTexture(gameObjectId::tile); 
     m_sprite = *Resources::instance().getSprite(gameObjectId::tile);
 
     m_sprite.setPosition(position); 

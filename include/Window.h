@@ -18,7 +18,7 @@ public:
 		m_window.display();
 		m_window.clear(sf::Color(103, 230, 210));
 	};
-	sf::RenderWindow& getWindow() { return m_window; };//i dont think its good oop maybe need to change
+	sf::RenderWindow& getWindow() { return m_window; };
 
 private:
 	sf::RenderWindow m_window;
