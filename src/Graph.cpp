@@ -41,9 +41,9 @@ void Graph::randomaize(int level) // todo
     {
         case 1 : size =14;a =3;b=8; // todo
                 break;
-        case 2: size = 8;a =3;b=6;
+        case 2: size = 8;a =3;b=8;
                 break;
-        case 3: size =4 ;a=0;b=9;
+        case 3: size =4 ;a=2;b=9;
                 break;
     }
 

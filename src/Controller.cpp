@@ -4,7 +4,7 @@ Controller::Controller()
 {
     texture = (Resources::instance().getTexture(gameObjectId::boat));
     text.setFont(Resources::instance().getFont());
-   // m_graph =Graph(11,11,1);
+
 }
 // ----------------------------------------------------------------------------
 
@@ -75,7 +75,7 @@ void Controller::handleRegularClick(float delta, const sf::Event &event) {
                                                                  getPosition(m_window.getWindow())),
                            menu::restart)) {
 
-            m_graph = Graph(11, 11, 1);  //!!check if it dosent make bad things with memory!!
+            m_graph = Graph(11, 11, m_level);  //!!check if it dosent make bad things with memory!!
         }
         if (m_menu.clicked(m_window.getWindow().mapPixelToCoords(sf::Mouse::
                                                                  getPosition(m_window.getWindow())),

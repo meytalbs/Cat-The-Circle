@@ -20,7 +20,7 @@ Menu::Menu()
     m_sprite.push_back(*Resources::instance().getSprite(gameObjectId::restartScreen));
 
 
-    for(int i =0 ;i<3 ;i++) {
+    for(int i =0 ;i<4 ;i++) {
         (m_sprite[i]).setPosition(sf::Vector2f(1300,MARGIN_TOP+400*i));//
     }
     (m_sprite[int(menu::close)]).setPosition(sf::Vector2f(40,40));//!! to do
