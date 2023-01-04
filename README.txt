@@ -3,8 +3,8 @@ Exercise 4 - "Cat the Circle" - OOP 2
 
 
 2. Program Partners:
-Meytal Abrahamian, 211369939
-Bar Oren, 206548752
+Meytal Abrahamian
+Bar Oren
 
 
 3. General Explanation: 
